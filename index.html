@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Stealth Corporations">
+    <title>Stealth Coporations</title>
+    <!-- Bootstrap -->
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Favicons -->
+    <meta name="theme-color" content="#712cf9">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Custom styles for this template -->
+    <link href="/static/css/landing.css" rel="stylesheet">
+    <link href="/static/css/icon-colors.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="col-lg-8 mx-auto p-5 py-md-4">
+      <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+          <span class="fs-4 text-muted">Stealth Corp</span>
+        </a>
+      </header>
+      
+      <main>
+        <div class="row">
+          <div class="fs-5 col-md-8">
+            <h1>About Me</h1>
+            <p>Welcome to my personal space where I share insights, knowledge, and expertise on security. I’ve dedicated myself to educating and inspiring professionals in the cybersecurity world. My mission is to help individuals and organizations strengthen their security posture through practical education, training, and consultation.</p>
+            <p>Throughout my career, I've worked with various organizations, contributing to building more secure systems and helping people understand the ever-evolving nature of cyber threats. I believe in sharing valuable content that can make a difference in people's lives and careers.</p>
+          </div>
+        </div>
+        
+        <hr class="col-3 col-md-2 mb-4">
+        
+        <!-- Replace content with Services and Contact Us -->
+        <div class="row g-5">
+          <div class="col-md-6">
+            <h2>Services</h2>
+            <p>I offer a variety of services to help you grow in the security field. From expert consultation to training and workshops, I provide practical knowledge to elevate your security practices.</p>
+            <ul>
+              <li>Cybersecurity Training</li>
+              <li>Consulting & Security Audits</li>
+              <li>Penetration Testing</li>
+              <li>Threat Hunting & Malware Analysis</li>
+            </ul>
+          </div>
+
+          <div class="col-md-6">
+            <h2>Contact Us</h2>
+            <p>If you’d like to get in touch, have questions, or are interested in my services, feel free to reach out. I’d love to hear from you!</p>
+            <form action="/submit-contact" method="post">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </main>
+      
+      <footer class="pt-5 my-5 mb-1 text-muted border-top">
+   
+      </footer>
+    </div>
+    
+    <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22389449.js"></script>
+  </body>
+</html>
