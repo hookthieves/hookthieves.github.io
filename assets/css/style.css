@@ -6,7 +6,7 @@ body {
 }
 
 .navbar {
-    background-color: #000000;
+    background-color: #ff0000; /* Red background like Terminator terminal */
     border-bottom: 1px solid #ffffff;
 }
 
@@ -19,16 +19,15 @@ body {
     color: #cccccc !important; /* Light gray on hover */
 }
 
-/* Terminator-style for navbar brand */
+/* Remove the previous Terminator text styling since we want the whole bar red */
 .terminator-style {
-    color: #ff0000 !important; /* Bright red like Terminator terminal */
-    text-shadow: 0 0 5px #ff0000; /* Subtle red glow */
+    /* Removed color and text-shadow; now handled by navbar background */
     font-weight: bold;
     letter-spacing: 1px;
 }
 
 .terminator-style:hover {
-    color: #ff3333 !important; /* Slightly darker red on hover */
+    /* No color change needed; handled by .navbar-brand:hover */
 }
 
 .jumbotron {
