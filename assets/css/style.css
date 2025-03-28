@@ -2,7 +2,7 @@
 body {
     background-color: #000000; /* Pure black background */
     color: #ffffff; /* White text for terminal look */
-    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-family: 'Consolas', 'Courier New', monospace; /* Consolas as primary font */
 }
 
 .navbar {
