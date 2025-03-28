@@ -47,3 +47,28 @@
 .footer-line {
     margin-bottom: 0; /* Tight against footer */
 }
+
+/* Credentials section styling */
+.credentials-section {
+    text-align: center; /* Center the heading */
+}
+
+.credentials-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #333333;
+}
+
+.credentials-section iframe {
+    border: 1px solid #e0e0e0; /* Match contact-box border */
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Mobile adjustments */
+@media (max-width: 767.98px) {
+    .credentials-section iframe {
+        height: 250px; /* Slightly smaller on mobile */
+    }
+}
