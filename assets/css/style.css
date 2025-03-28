@@ -31,3 +31,19 @@
         min-height: auto; /* Remove fixed height on mobile for natural stacking */
     }
 }
+/* Horizontal lines for header and footer */
+.header-line, .footer-line {
+    border: 0;
+    border-top: 1px solid #e0e0e0; /* Light grey to match theme */
+    margin: 0; /* Remove default margins */
+    width: 100%; /* Full width */
+}
+
+/* Ensure no extra spacing */
+.header-line {
+    margin-top: 0; /* Tight against navbar */
+}
+
+.footer-line {
+    margin-bottom: 0; /* Tight against footer */
+}
