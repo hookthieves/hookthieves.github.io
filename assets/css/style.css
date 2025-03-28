@@ -1,122 +1,93 @@
-/* Command Line Theme */
+/* Minimal White Theme */
 body {
-    background-color: #000000; /* Pure black background */
-    color: #ffffff; /* White text for terminal look */
-    font-family: 'Consolas', 'Courier New', monospace; /* Consolas as primary font */
+    background-color: #ffffff; /* Pure white background */
+    color: #333333; /* Dark gray text for readability */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Clean system font */
+    line-height: 1.6;
 }
 
 .navbar {
-    background-color: #ff0000; /* Red background like Terminator terminal */
-    border-bottom: 1px solid #ffffff;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0; /* Light gray border */
+    padding: 1rem 0;
 }
 
 .navbar-brand, .nav-link {
-    color: #ffffff !important;
-    text-transform: uppercase;
+    color: #333333 !important;
+    font-weight: 500;
 }
 
 .navbar-brand:hover, .nav-link:hover {
-    color: #cccccc !important; /* Light gray on hover */
-}
-
-/* Remove the previous Terminator text styling since we want the whole bar red */
-.terminator-style {
-    /* Removed color and text-shadow; now handled by navbar background */
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.terminator-style:hover {
-    /* No color change needed; handled by .navbar-brand:hover */
+    color: #666666 !important; /* Slightly lighter gray on hover */
 }
 
 .jumbotron {
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    padding: 1rem;
+    background-color: #f8f8f8; /* Very light gray */
+    color: #333333;
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
 
 .btn-primary {
-    background-color: #ffffff;
-    border-color: #ffffff;
-    color: #000000;
-    text-transform: uppercase;
-    font-weight: bold;
+    background-color: #333333;
+    border-color: #333333;
+    color: #ffffff;
+    border-radius: 0;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: #cccccc;
-    border-color: #cccccc;
-    color: #000000;
+    background-color: #555555;
+    border-color: #555555;
+    color: #ffffff;
 }
 
 footer {
-    background-color: #000000;
-    color: #ffffff;
-    border-top: 1px solid #ffffff;
+    background-color: #ffffff;
+    color: #666666;
+    border-top: 1px solid #e0e0e0;
+    padding: 1rem 0;
 }
 
 .form-control {
-    background-color: #000000;
-    border: 1px solid #ffffff;
-    color: #ffffff;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    color: #333333;
     border-radius: 0;
+    padding: 0.5rem;
 }
 
 .form-control:focus {
-    border-color: #ffffff;
-    background-color: #1a1a1a; /* Slightly lighter black */
+    border-color: #333333;
+    box-shadow: none; /* No glow */
 }
 
 h1, h2, h3 {
-    color: #ffffff;
-    text-transform: uppercase;
-    position: relative;
-    display: inline-block;
+    color: #333333;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+h1.display-4 {
+    font-size: 2.5rem;
 }
 
 p, .lead {
-    color: #ffffff;
+    color: #666666;
 }
 
 a {
-    color: #ffffff;
+    color: #333333;
 }
 
 a:hover {
-    color: #cccccc;
-    text-decoration: none;
+    color: #555555;
+    text-decoration: underline;
 }
 
-/* Command-line style for headings */
-h1.display-4::before {
-    content: "./";
-    color: #ffffff;
-}
-
-h1.display-4::after {
-    content: "_";
-    animation: blink 1s infinite;
-    position: absolute;
-    right: -0.5em;
-}
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-/* Smaller headings */
-h2::before, h3::before {
-    content: "./";
-    color: #ffffff;
-}
-
-h2::after, h3::after {
-    content: "_";
-    animation: blink 1s infinite;
-    position: absolute;
-    right: -0.5em;
+hr {
+    border-color: #e0e0e0;
 }
