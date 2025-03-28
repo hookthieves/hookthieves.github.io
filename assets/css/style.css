@@ -72,3 +72,39 @@
         height: 250px; /* Slightly smaller on mobile */
     }
 }
+
+/* Slimmer, thinner jumbotron */
+.jumbotron {
+    background-color: #f8f8f8; /* Keep light grey */
+    color: #333333;
+    border: 0.5px solid #e0e0e0; /* Thinner border */
+    border-radius: 0; /* Keep squared-off look */
+    padding: 1rem; /* Reduced from 2rem for a slimmer profile */
+    margin-bottom: 1.5rem; /* Slightly reduced from 2rem */
+}
+
+/* Adjust typography for a sleeker look */
+.jumbotron h1.display-4 {
+    font-size: 2rem; /* Smaller than 2.5rem, less bulky */
+    margin-bottom: 0.5rem; /* Tighter spacing */
+}
+
+.jumbotron p.lead {
+    font-size: 1rem; /* Smaller than default lead (1.25rem) */
+    margin-bottom: 0; /* Remove extra space below */
+}
+
+/* Mobile adjustments */
+@media (max-width: 767.98px) {
+    .jumbotron {
+        padding: 0.75rem; /* Even slimmer on mobile */
+    }
+
+    .jumbotron h1.display-4 {
+        font-size: 1.5rem; /* Smaller on mobile */
+    }
+
+    .jumbotron p.lead {
+        font-size: 0.9rem; /* Slimmer text on mobile */
+    }
+}
