@@ -24,6 +24,10 @@ title: Contact
                         <label for="message">Your message</label>
                         <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                     </div>
+                    <!-- reCAPTCHA Widget -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-block">Send</button>
                 </form>
             </div>
@@ -49,3 +53,6 @@ title: Contact
         </div>
     </div>
 </div>
+
+<!-- reCAPTCHA Script (Add before closing </body> in default.html) -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
