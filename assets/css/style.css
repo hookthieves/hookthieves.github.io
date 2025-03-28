@@ -1,93 +1,111 @@
-/* Dark Hacker Theme */
+/* Command Line Theme */
 body {
-    background-color: #1a1a1a; /* Dark gray-black background */
-    color: #00ff00; /* Neon green text for that hacker feel */
-    font-family: 'Courier New', Courier, monospace; /* Monospace font for terminal vibe */
+    background-color: #000000; /* Pure black background */
+    color: #ffffff; /* White text for terminal look */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
 }
 
 .navbar {
-    background-color: #0d0d0d; /* Darker navbar */
-    border-bottom: 2px solid #00ff00; /* Neon green border */
+    background-color: #000000;
+    border-bottom: 1px solid #ffffff;
 }
 
 .navbar-brand, .nav-link {
-    color: #00ff00 !important;
+    color: #ffffff !important;
     text-transform: uppercase;
 }
 
 .navbar-brand:hover, .nav-link:hover {
-    color: #00cc00 !important; /* Slightly darker green on hover */
+    color: #cccccc !important; /* Light gray on hover */
 }
 
 .jumbotron {
-    background-color: #2b2b2b; /* Dark gray */
-    color: #00ff00;
-    border: 1px solid #ff00ff; /* Neon magenta border */
-    box-shadow: 0 0 10px #ff00ff; /* Glowing effect */
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 1rem;
 }
 
 .btn-primary {
-    background-color: #ff00ff; /* Neon magenta */
-    border-color: #ff00ff;
-    color: #000;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
     text-transform: uppercase;
     font-weight: bold;
 }
 
 .btn-primary:hover {
-    background-color: #cc00cc; /* Darker magenta */
-    border-color: #cc00cc;
-    box-shadow: 0 0 5px #ff00ff; /* Glow on hover */
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: #000000;
 }
 
 footer {
-    background-color: #0d0d0d;
-    color: #00ff00;
-    border-top: 2px solid #00ff00;
+    background-color: #000000;
+    color: #ffffff;
+    border-top: 1px solid #ffffff;
 }
 
 .form-control {
-    background-color: #2b2b2b;
-    border: 1px solid #00ff00;
-    color: #00ff00;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     border-radius: 0;
 }
 
 .form-control:focus {
-    border-color: #ff00ff;
-    box-shadow: 0 0 5px #ff00ff;
-    background-color: #333333;
+    border-color: #ffffff;
+    background-color: #1a1a1a; /* Slightly lighter black */
 }
 
 h1, h2, h3 {
-    color: #ff00ff; /* Neon magenta for headings */
+    color: #ffffff;
     text-transform: uppercase;
+    position: relative;
+    display: inline-block;
 }
 
 p, .lead {
-    color: #00ff00;
+    color: #ffffff;
 }
 
 a {
-    color: #ff00ff;
+    color: #ffffff;
 }
 
 a:hover {
-    color: #cc00cc;
+    color: #cccccc;
     text-decoration: none;
 }
 
-/* Add subtle glitch effect to headings */
-h1.display-4 {
-    position: relative;
-    animation: glitch 2s infinite;
+/* Command-line style for headings */
+h1.display-4::before {
+    content: "./";
+    color: #ffffff;
 }
 
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    60% { transform: translate(-2px, 0); }
-    80% { transform: translate(2px, 0); }
-    100% { transform: translate(0); }
+h1.display-4::after {
+    content: "_";
+    animation: blink 1s infinite;
+    position: absolute;
+    right: -0.5em;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Smaller headings */
+h2::before, h3::before {
+    content: "./";
+    color: #ffffff;
+}
+
+h2::after, h3::after {
+    content: "_";
+    animation: blink 1s infinite;
+    position: absolute;
+    right: -0.5em;
 }
