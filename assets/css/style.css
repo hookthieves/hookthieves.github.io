@@ -108,3 +108,37 @@
         font-size: 0.9rem; /* Slimmer text on mobile */
     }
 }
+
+/* Sticky Footer Styles */
+html, body {
+    height: 100%; /* Ensure full height for the page */
+    margin: 0; /* Remove default margins */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimum height of viewport */
+}
+
+.page-wrapper {
+    flex: 1 0 auto; /* Grow to fill available space, push footer down */
+}
+
+.footer {
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    background-color: #ffffff;
+    color: #666666;
+    border-top: 1px solid #e0e0e0;
+    padding: 1rem 0;
+}
+
+.footer-line {
+    flex-shrink: 0; /* Keep HR from shrinking */
+    margin-bottom: 0;
+}
+
+/* Ensure main content doesn’t overlap footer */
+main {
+    flex-grow: 1; /* Allow main content to expand */
+}
