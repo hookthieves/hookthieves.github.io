@@ -19,6 +19,18 @@ body {
     color: #cccccc !important; /* Light gray on hover */
 }
 
+/* Terminator-style for navbar brand */
+.terminator-style {
+    color: #ff0000 !important; /* Bright red like Terminator terminal */
+    text-shadow: 0 0 5px #ff0000; /* Subtle red glow */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.terminator-style:hover {
+    color: #ff3333 !important; /* Slightly darker red on hover */
+}
+
 .jumbotron {
     background-color: #000000;
     color: #ffffff;
