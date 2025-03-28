@@ -1,35 +1,93 @@
-/* Custom styles for cybersecurity theme */
+/* Dark Hacker Theme */
 body {
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: #1a1a1a; /* Dark gray-black background */
+    color: #00ff00; /* Neon green text for that hacker feel */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for terminal vibe */
+}
+
+.navbar {
+    background-color: #0d0d0d; /* Darker navbar */
+    border-bottom: 2px solid #00ff00; /* Neon green border */
+}
+
+.navbar-brand, .nav-link {
+    color: #00ff00 !important;
+    text-transform: uppercase;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #00cc00 !important; /* Slightly darker green on hover */
 }
 
 .jumbotron {
-    background-color: #007bff;
-    color: white;
+    background-color: #2b2b2b; /* Dark gray */
+    color: #00ff00;
+    border: 1px solid #ff00ff; /* Neon magenta border */
+    box-shadow: 0 0 10px #ff00ff; /* Glowing effect */
 }
 
 .btn-primary {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #ff00ff; /* Neon magenta */
+    border-color: #ff00ff;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .btn-primary:hover {
-    background-color: #003d82;
-    border-color: #003d82;
+    background-color: #cc00cc; /* Darker magenta */
+    border-color: #cc00cc;
+    box-shadow: 0 0 5px #ff00ff; /* Glow on hover */
+}
+
+footer {
+    background-color: #0d0d0d;
+    color: #00ff00;
+    border-top: 2px solid #00ff00;
 }
 
 .form-control {
+    background-color: #2b2b2b;
+    border: 1px solid #00ff00;
+    color: #00ff00;
     border-radius: 0;
-    border-color: #ced4da;
 }
 
 .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    border-color: #ff00ff;
+    box-shadow: 0 0 5px #ff00ff;
+    background-color: #333333;
 }
 
-h3 {
-    color: #007bff;
-    margin-top: 1.5rem;
+h1, h2, h3 {
+    color: #ff00ff; /* Neon magenta for headings */
+    text-transform: uppercase;
+}
+
+p, .lead {
+    color: #00ff00;
+}
+
+a {
+    color: #ff00ff;
+}
+
+a:hover {
+    color: #cc00cc;
+    text-decoration: none;
+}
+
+/* Add subtle glitch effect to headings */
+h1.display-4 {
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-2px, 0); }
+    80% { transform: translate(2px, 0); }
+    100% { transform: translate(0); }
 }
