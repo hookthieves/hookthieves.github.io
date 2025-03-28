@@ -1,14 +1,14 @@
 /* Minimal White Theme */
 body {
-    background-color: #ffffff; /* Pure white background */
-    color: #333333; /* Dark gray text for readability */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Clean system font */
+    background-color: #ffffff;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
 }
 
 .navbar {
     background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0; /* Light gray border */
+    border-bottom: 1px solid #e0e0e0;
     padding: 1rem 0;
 }
 
@@ -18,11 +18,11 @@ body {
 }
 
 .navbar-brand:hover, .nav-link:hover {
-    color: #666666 !important; /* Slightly lighter gray on hover */
+    color: #666666 !important;
 }
 
 .jumbotron {
-    background-color: #f8f8f8; /* Very light gray */
+    background-color: #f8f8f8;
     color: #333333;
     border: 1px solid #e0e0e0;
     border-radius: 0;
@@ -45,11 +45,16 @@ body {
     color: #ffffff;
 }
 
-footer {
+.footer {
     background-color: #ffffff;
     color: #666666;
     border-top: 1px solid #e0e0e0;
     padding: 1rem 0;
+}
+
+.footer-text p {
+    margin-bottom: 0; /* Remove extra spacing on mobile */
+    font-size: 0.9rem; /* Slightly smaller text for mobile */
 }
 
 .form-control {
@@ -57,12 +62,12 @@ footer {
     border: 1px solid #e0e0e0;
     color: #333333;
     border-radius: 0;
-    padding: 0.5rem;
+    padding: 0.75rem;
 }
 
 .form-control:focus {
     border-color: #333333;
-    box-shadow: none; /* No glow */
+    box-shadow: none;
 }
 
 h1, h2, h3 {
@@ -90,4 +95,75 @@ a:hover {
 
 hr {
     border-color: #e0e0e0;
+}
+
+/* Contact page enhancements */
+.contact-box {
+    border: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    background-color: #ffffff;
+}
+
+.contact-box h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.contact-box h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-box p, .contact-box ul {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.contact-box ul li {
+    margin-bottom: 0.5rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Ensure consistent spacing */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 767.98px) {
+    h1.display-4 {
+        font-size: 2rem; /* Smaller heading on mobile */
+    }
+
+    .lead {
+        font-size: 1rem; /* Smaller lead text on mobile */
+    }
+
+    .contact-box {
+        padding: 1rem; /* Less padding on mobile */
+    }
+
+    .contact-box h3 {
+        font-size: 1.1rem; /* Slightly smaller headings */
+    }
+
+    .footer-text p {
+        font-size: 0.85rem; /* Even smaller footer text on mobile */
+    }
+
+    .footer .row {
+        text-align: left; /* Ensure left alignment on mobile */
+    }
+
+    .navbar {
+        padding: 0.5rem 0; /* Reduce navbar padding on mobile */
+    }
+
+    .btn-primary {
+        padding: 0.4rem 1rem; /* Slightly smaller buttons */
+    }
 }
