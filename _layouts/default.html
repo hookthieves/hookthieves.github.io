@@ -10,6 +10,12 @@
 <body data-theme="light">
     <div class="page-wrapper">
         {% include navbar.html %}
+        <div class="theme-switch-container container">
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
         <main class="container py-5">
             {{ content }}
         </main>
@@ -31,23 +37,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/custom.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!-- Theme Toggle Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const radios = document.querySelectorAll('input[name="theme"]');
-            radios.forEach(radio => {
-                radio.addEventListener('change', function () {
-                    document.body.setAttribute('data-theme', this.value);
-                    localStorage.setItem('theme', this.value); // Save preference
-                });
-            });
+            const toggle = document.getElementById('theme-toggle');
+            const body = document.body;
 
             // Load saved theme preference
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-                document.querySelector(`input[value="${savedTheme}"]`).checked = true;
+            if (savedTheme === 'dark') {
+                body.setAttribute('data-theme', 'dark');
+                toggle.checked = true;
             }
+
+            // Toggle theme on switch change
+            toggle.addEventListener('change', function () {
+                if (this.checked) {
+                    body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
         });
     </script>
 </body>
