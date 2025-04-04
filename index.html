@@ -1,11 +1,265 @@
----
-layout: default
-title: Home
----
-<div class="jumbotron">
-    <h1 class="display-4">CN Security Consulting</h1>
-    <p class="lead">We are an offensive security consulting company located in Melbourne Australia.</p>
-    <hr class="my-4">
-    <p>We offer a range of services such as Offensive Phishing Operations, WiFi Exploitation, Red Teaming Simulations and more.. To find out, click on the button below! </p>
-    <a class="btn btn-primary btn-lg" href="/services" role="button">Our Services</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CN Security Consulting Pty Ltd</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background-color: #f5f6f5;
+            color: #333;
+        }
+        .hero {
+            background: #1a2a44; /* Solid dark background */
+            color: #fff; /* White text for contrast */
+            padding: 6rem 0;
+            position: relative;
+        }
+        .navbar {
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #1a2a44 !important;
+        }
+        .nav-link {
+            color: #555 !important;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #1a2a44 !important;
+        }
+        .section-padding {
+            padding: 5rem 0;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1a2a44;
+        }
+        .hero h1 {
+            color: #fff; /* Ensure title is white */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for readability */
+        }
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: #1a2a44;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #2c3e50;
+        }
+        .btn-outline-primary {
+            border-color: #1a2a44;
+            color: #1a2a44;
+            font-weight: 600;
+        }
+        .btn-outline-primary:hover {
+            background: #1a2a44;
+            color: #fff;
+        }
+        footer {
+            background: #1a2a44;
+            color: #ddd;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: none;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: #1a2a44;
+            box-shadow: 0 0 0 0.2rem rgba(26, 42, 68, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CN Security Consulting Pty Ltd</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">CN Security Consulting Pty Ltd</h1>
+            <p class="lead">We are an offensive security consulting company located in Melbourne Australia.</p>
+            <p>We offer a range of cyber security services such as Offensive Phishing Operations, WiFi Exploitation, Red Teaming Simulations and more.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Cuong Nguyen</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3 class="h4">Principal Security Consultant</h3>
+                    <p class="text-muted mb-4">Over a decade of expertise in offensive cybersecurity</p>
+		    <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
+
+		    <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+		    <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>
+
+		</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <p class="text-center mb-5 text-muted">Explore the cutting-edge offensive security solutions I provide to strengthen your defenses. My tailored services are designed to proactively test your systems, uncover vulnerabilities, and prepare your organisation to withstand even the most sophisticated threats. Discover how I can help you stay one step ahead—take a look at the offerings below and let’s fortify your security together.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card service-card p-4 h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Penetration Testing</h3>
+                            <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
+                            <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card p-4 h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Malware Development</h3>
+                            <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
+                            <p><strong>Options:</strong> Single payload or recurring simulations</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card p-4 h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Red Teaming Simulation</h3>
+                            <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
+                            <p><strong>Options:</strong> Standalone or persistent exercises</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card p-4 h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Offensive Phishing Operations</h3>
+                            <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
+                            <p><strong>Options:</strong> Single strike or ongoing drills</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card p-4 h-100">
+                        <div class="card-body">
+                            <h3 class="card-title h5">WiFi Exploitation</h3>
+                            <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
+                            <p><strong>Options:</strong> One-time breach assessment</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact Us</h2>
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <h4 class="mb-4">Contact Details</h4>
+                    <p><strong>Address:</strong> Melbourne VIC, Australia</p>
+                    <p><strong>Phone:</strong> <a href="tel:0422662044" class="text-decoration-none text-dark">0422 662 044</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:cnsecconsultingptyltd@gmail.com" class="text-decoration-none text-dark">cnsecconsultingptyltd@gmail.com</a></p>
+                    <p><strong>ABN:</strong> 90 706 059 463</p>
+                    <h5 class="mt-4">Operating Hours</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li>Monday: 5:00 PM - 10:00 PM</li>
+                        <li>Tuesday: 5:00 PM - 10:00 PM</li>
+                        <li>Wednesday: 5:00 PM - 10:00 PM</li>
+                        <li>Thursday: 5:00 PM - 10:00 PM</li>
+                        <li>Friday: 5:00 PM - 10:00 PM</li>
+                        <li>Saturday: 8:00 AM - 12:00 PM</li>
+                        <li>Sunday: 8:00 AM - 12:00 PM</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-4">Get in Touch</h4>
+                    <form action="https://formspree.io/f/xjkyegkk" method="POST">
+                        <div class="mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="message" class="form-control" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+			 <!-- reCAPTCHA Widget -->
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
+                    </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2025 CN Security Consulting Pty Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>
