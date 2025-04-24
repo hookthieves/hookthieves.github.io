@@ -101,21 +101,37 @@
             border-color: #1a2a44;
             box-shadow: 0 0 0 0.2rem rgba(26, 42, 68, 0.25);
         }
-        .g-recaptcha {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
+        .recaptcha-container {
+            background: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .recaptcha-container label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .form-message {
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
         @media (max-width: 576px) {
             .service-card {
                 padding: 1rem;
+            }
+            .recaptcha-container {
+                padding: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand" href="#">CN Security Consulting Pty Ltd</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,10 +165,9 @@
                 <div class="col-md-8 mx-auto text-center">
                     <h3 class="h4">Principal Security Consultant</h3>
                     <p class="text-muted mb-4">Over a decade of expertise in offensive cybersecurity | OSCP, OSWP, OSWA Certified</p>
-		    <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
-
-		    <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
-		    <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>
+                    <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
+                    <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+                    <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>
                 </div>
             </div>
         </div>
@@ -247,7 +262,7 @@
                 </div>
                 <div class="col-md-6">
                     <h4 class="mb-4">Get in Touch</h4>
-                    <form action="https://formspree.io/f/xjkyegkk" method="POST">
+                    <form id="contact-form" action="https://formspree.io/f/xjkyegkk" method="POST">
                         <div class="mb-3">
                             <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                         </div>
@@ -257,10 +272,11 @@
                         <div class="mb-3">
                             <textarea name="message" class="form-control" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-			 <!-- reCAPTCHA Widget -->
-                    <div class="form-group">
-                        <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
-                    </div>
+                        <div class="recaptcha-container">
+                            <label for="g-recaptcha">Verify you're not a robot</label>
+                            <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
+                        </div>
+                        <div id="form-message" class="form-message d-none"></div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
                 </div>
@@ -277,7 +293,68 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- reCAPTCHA Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Form Submission Handling -->
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const recaptchaResponse = grecaptcha.getResponse();
+            const messageDiv = document.getElementById('form-message');
+
+            if (!recaptchaResponse) {
+                messageDiv.classList.remove('d-none');
+                messageDiv.classList.add('text-danger');
+                messageDiv.textContent = 'Please complete the reCAPTCHA verification.';
+                return;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                messageDiv.classList.remove('d-none');
+                if (response.ok) {
+                    messageDiv.classList.remove('text-danger');
+                    messageDiv.classList.add('text-success');
+                    messageDiv.textContent = 'Message sent successfully!';
+                    form.reset();
+                    grecaptcha.reset();
+                } else {
+                    messageDiv.classList.add('text-danger');
+                    messageDiv.textContent = 'Error sending message. Please try again.';
+                }
+            } catch (error) {
+                messageDiv.classList.remove('d-none');
+                messageDiv.classList.add('text-danger');
+                messageDiv.textContent = 'Network error. Please try again later.';
+            }
+        });
+    </script>
+    <!-- Active Navigation Highlighting -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-   
