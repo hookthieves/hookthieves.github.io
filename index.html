@@ -17,191 +17,176 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxg SEO:PHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.9;
-            background-color: #1C2526;
-            color: #FFFFFF;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            color: #FFFFFF;
-        }
-        p, a, li, .card-text {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            color: #D3D3D3;
-        }
-        .hero {
-            background: linear-gradient(135deg, #2C3E50 0%, #1C2526 100%);
-            animation: gradient 15s ease infinite;
-            background-size: 200% 200%;
-            color: #FFFFFF;
-            padding: 6rem 0;
-            text-align: center;
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .navbar {
-            background: #1C2526;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            padding: 1rem 0;
-        }
-        .navbar-brand {
-            font-weight: 700;
-            color: #2C3E50 !important;
-        }
-        .nav-link {
-            color: #D3D3D3 !important;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #2C3E50 !important;
-        }
-        .section-padding {
-            padding: 5rem 0;
-        }
-        .hero h1 {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        }
-        .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #D3D3D3;
-        }
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.9;
+        background-color: #1C2526;
+        color: #FFFFFF;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+    p, a, li, .card-text {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: #D3D3D3;
+    }
+    .hero {
+        background: linear-gradient(135deg, #2C3E50 0%, #1C2526 100%);
+        animation: gradient 15s ease infinite;
+        background-size: 200% 200%;
+        color: #FFFFFF;
+        padding: 6rem 0;
+        text-align: center;
+    }
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .navbar {
+        background: #1C2526;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        padding: 1rem 0;
+    }
+    .navbar-brand {
+        font-weight: 700;
+        color: #FFFFFF !important; /* White for all screen sizes */
+    }
+    .nav-link {
+        color: #D3D3D3 !important;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .nav-link:hover, .nav-link.active {
+        color: #2C3E50 !important;
+    }
+    .navbar-toggler {
+        border: none; /* Remove default border */
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* White icon for all screen sizes */
+    }
+    .section-padding {
+        padding: 5rem 0;
+    }
+    .hero h1 {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .lead {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #D3D3D3;
+    }
+    .service-card {
+        border: none;
+        border-radius: 10px;
+        background: #2A3435;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    }
+    .service-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        opacity: 0.95;
+    }
+    .card-title h5 {
+        color: #FFFFFF !important; /* Ensure service titles are white */
+    }
+    .service-card i {
+        color: #8B0000 !important; /* Dark red for service icons */
+    }
+    .btn-primary {
+        background: #2C3E50;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-primary:hover {
+        background: #1F2A3C;
+    }
+    .btn-primary::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { width: 0; height: 0; opacity: 1; }
+        100% { width: 200px; height: 200px; opacity: 0; }
+    }
+    .btn-outline-primary {
+        border-color: #FFFFFF;
+        color: #FFFFFF;
+    }
+    .btn-outline-primary:hover {
+        background: #2C3E50;
+        color: #FFFFFF;
+        border-color: #2C3E50;
+    }
+    footer {
+        background: #1C2526;
+        color: #D3D3D3;
+        padding: 2rem 0;
+        font-size: 0.9rem;
+        border-top: 1px solid #2C3E50;
+    }
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #D3D3D3;
+        background: #2A3435;
+        color: #FFFFFF;
+    }
+    .form-control:focus {
+        border-color: #2C3E50;
+        box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        background: #2A3435;
+        color: #FFFFFF;
+    }
+    .form-control::placeholder {
+        color: #A0A0A0;
+    }
+    .recaptcha-container {
+        background: #2A3435;
+        border: 1px solid #D3D3D3;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    .recaptcha-container label {
+        font-size: 0.9rem;
+        color: #D3D3D3;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    .form-message {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    @media (max-width: 576px) {
         .service-card {
-            border: none;
-            border-radius: 10px;
-            background: #2A3435;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-            opacity: 0.95;
-        }
-        .card-title h5 {
-            color: #FFFFFF !important;
-        }
-        .btn-primary {
-            background: #2C3E50;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary:hover {
-            background: #1F2A3C;
-        }
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { width: 0; height: 0; opacity: 1; }
-            100% { width: 200px; height: 200px; opacity: 0; }
-        }
-        .btn-outline-primary {
-            border-color: #FFFFFF;
-            color: #FFFFFF;
-        }
-        .btn-outline-primary:hover {
-            background: #2C3E50;
-            color: #FFFFFF;
-            border-color: #2C3E50;
-        }
-        footer {
-            background: #1C2526;
-            color: #D3D3D3;
-            padding: 2rem 0;
-            font-size: 0.9rem;
-            border-top: 1px solid #2C3E50;
-        }
-        .form-control {
-            border-radius: 8px;
-            border: 1px solid #D3D3D3;
-            background: #2A3435;
-            color: #FFFFFF;
-        }
-        .form-control:focus {
-            border-color: #2C3E50;
-            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-            background: #2A3435;
-            color: #FFFFFF;
-        }
-        .form-control::placeholder {
-            color: #A0A0A0;
+            padding: 1rem;
         }
         .recaptcha-container {
-            background: #2A3435;
-            border: 1px solid #D3D3D3;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
+            padding: 0.5rem;
         }
-        .recaptcha-container label {
-            font-size: 0.9rem;
-            color: #D3D3D3;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        .form-message {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 576px) {
-            .service-card {
-                padding: 1rem;
-            }
-            .recaptcha-container {
-                padding: 0.5rem;
-            }
+    }
+</style>
 
-
-/* Make the navbar-brand (CN Security Consulting Pty Ltd) white */
-.navbar-brand {
-    font-weight: 700;
-    color: #FFFFFF !important; /* Changed from #2C3E50 to white */
-}
-
-/* Style the navbar toggler icon for mobile */
-.navbar-toggler {
-    border: none; /* Remove default border if needed */
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* White icon */
-}
-
-/* Ensure service card titles are white */
-.card-title h5 {
-    color: #FFFFFF !important; /* Already set, but reinforcing for clarity */
-}
-
-/* Change service icons to dark red */
-.service-card i {
-    color: #8B0000 !important; /* Dark red color for icons */
-}
-        }
-        
-    </style>
+    
 </head>
 <body>
     <!-- Navigation -->
@@ -247,70 +232,70 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Services</h2>
-            <p class="text-center mb-5 text-muted">Discover our tailored offensive security solutions designed to test your systems, uncover vulnerabilities, and prepare your organization against sophisticated threats.</p>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card service-card p-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="bi bi-shield-lock mb-3" style="font-size: 2rem; color: #2C3E50;"></i>
-                            <h3 class="card-title h5">Penetration Testing</h3>
-                            <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
-                            <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
-                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
-                        </div>
+<!-- Services Section -->
+<section id="services" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Services</h2>
+        <p class="text-center mb-5 text-muted">Discover our tailored offensive security solutions designed to test your systems, uncover vulnerabilities, and prepare your organization against sophisticated threats.</p>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card service-card p-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-shield-lock mb-3" style="font-size: 2rem;"></i>
+                        <h3 class="card-title h5">Penetration Testing</h3>
+                        <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
+                        <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
+                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card service-card p-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="bi bi-code-slash mb-3" style="font-size: 2rem; color: #2C3E50;"></i>
-                            <h3 class="card-title h5">Malware Development</h3>
-                            <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
-                            <p><strong>Options:</strong> Single payload or recurring simulations</p>
-                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card service-card p-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-code-slash mb-3" style="font-size: 2rem;"></i>
+                        <h3 class="card-title h5">Malware Development</h3>
+                        <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
+                        <p><strong>Options:</strong> Single payload or recurring simulations</p>
+                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card service-card p-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="bi bi-bullseye mb-3" style="font-size: 2rem; color: #2C3E50;"></i>
-                            <h3 class="card-title h5">Red Teaming Simulation</h3>
-                            <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
-                            <p><strong>Options:</strong> Standalone or persistent exercises</p>
-                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card service-card p-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-bullseye mb-3" style="font-size: 2rem;"></i>
+                        <h3 class="card-title h5">Red Teaming Simulation</h3>
+                        <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
+                        <p><strong>Options:</strong> Standalone or persistent exercises</p>
+                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card service-card p-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="bi bi-envelope mb-3" style="font-size: 2rem; color: #2C3E50;"></i>
-                            <h3 class="card-title h5">Offensive Phishing Operations</h3>
-                            <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
-                            <p><strong>Options:</strong> Single strike or ongoing drills</p>
-                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card service-card p-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-envelope mb-3" style="font-size: 2rem;"></i>
+                        <h3 class="card-title h5">Offensive Phishing Operations</h3>
+                        <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
+                        <p><strong>Options:</strong> Single strike or ongoing drills</p>
+                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card service-card p-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="bi bi-wifi mb-3" style="font-size: 2rem; color: #2C3E50;"></i>
-                            <h3 class="card-title h5">WiFi Exploitation</h3>
-                            <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
-                            <p><strong>Options:</strong> One-time breach assessment</p>
-                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card service-card p-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-wifi mb-3" style="font-size: 2rem;"></i>
+                        <h3 class="card-title h5">WiFi Exploitation</h3>
+                        <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
+                        <p><strong>Options:</strong> One-time breach assessment</p>
+                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
