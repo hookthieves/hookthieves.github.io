@@ -14,7 +14,7 @@
     <!-- Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxg SEO:PHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -35,7 +35,7 @@
         font-weight: 400;
         color: #D3D3D3;
     }
-    .hero {
+    .hero, .service-card {
         background: linear-gradient(135deg, #2C3E50 0%, #1C2526 100%);
         animation: gradient 15s ease infinite;
         background-size: 200% 200%;
@@ -85,17 +85,21 @@
     .service-card {
         border: none;
         border-radius: 10px;
-        background: #2A3435;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        padding: 2rem;
     }
     .service-card:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
         opacity: 0.95;
     }
-    .card-title h5 {
-        color: #FFFFFF !important; /* Ensure service titles are white */
+    .service-card .card-title h5,
+    .service-card .card-text,
+    .service-card .btn-outline-primary,
+    .service-card p,
+    .service-card strong {
+        color: #FFFFFF !important; /* All text in service cards is white */
     }
     .service-card i {
         color: #8B0000 !important; /* Dark red for service icons */
@@ -185,8 +189,6 @@
         }
     }
 </style>
-
-    
 </head>
 <body>
     <!-- Navigation -->
@@ -232,70 +234,70 @@
         </div>
     </section>
 
-<!-- Services Section -->
-<section id="services" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
-    <div class="container">
-        <h2 class="text-center mb-5">Our Services</h2>
-        <p class="text-center mb-5 text-muted">Discover our tailored offensive security solutions designed to test your systems, uncover vulnerabilities, and prepare your organization against sophisticated threats.</p>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card service-card p-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-shield-lock mb-3" style="font-size: 2rem;"></i>
-                        <h3 class="card-title h5">Penetration Testing</h3>
-                        <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
-                        <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
-                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+    <!-- Services Section -->
+    <section id="services" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <p class="text-center mb-5 text-muted">Discover our tailored offensive security solutions designed to test your systems, uncover vulnerabilities, and prepare your organization against sophisticated threats.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-lock mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Penetration Testing</strong></h3>
+                            <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
+                            <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card service-card p-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-code-slash mb-3" style="font-size: 2rem;"></i>
-                        <h3 class="card-title h5">Malware Development</h3>
-                        <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
-                        <p><strong>Options:</strong> Single payload or recurring simulations</p>
-                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-code-slash mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Malware Development</strong></h3>
+                            <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
+                            <p><strong>Options:</strong> Single payload or recurring simulations</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card service-card p-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-bullseye mb-3" style="font-size: 2rem;"></i>
-                        <h3 class="card-title h5">Red Teaming Simulation</h3>
-                        <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
-                        <p><strong>Options:</strong> Standalone or persistent exercises</p>
-                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-bullseye mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Red Teaming Simulation</strong></h3>
+                            <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
+                            <p><strong>Options:</strong> Standalone or persistent exercises</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card service-card p-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-envelope mb-3" style="font-size: 2rem;"></i>
-                        <h3 class="card-title h5">Offensive Phishing Operations</h3>
-                        <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
-                        <p><strong>Options:</strong> Single strike or ongoing drills</p>
-                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-envelope mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Offensive Phishing Operations</strong></h3>
+                            <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
+                            <p><strong>Options:</strong> Single strike or ongoing drills</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card service-card p-4 h-100">
-                    <div class="card-body text-center">
-                        <i class="bi bi-wifi mb-3" style="font-size: 2rem;"></i>
-                        <h3 class="card-title h5">WiFi Exploitation</h3>
-                        <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
-                        <p><strong>Options:</strong> One-time breach assessment</p>
-                        <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-wifi mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>WiFi Exploitation</strong></h3>
+                            <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
+                            <p><strong>Options:</strong> One-time breach assessment</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
@@ -331,12 +333,10 @@
                         <div class="mb-3">
                             <textarea name="message" class="form-control" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <div class="recaptcha-container">
-                            <label for="g-recaptcha">Verify you're not a robot</label>
-                            <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
-                        </div>
+                        <label for="g-recaptcha" style="font-size: 0.9rem; color: #D3D3D3; margin-bottom: 0.5rem; display: block;">Verify you're not a robot</label>
+                        <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
                         <div id="form-message" class="form-message d-none"></div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary mt-3">Send Message</button>
                     </form>
                 </div>
             </div>
