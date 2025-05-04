@@ -24,6 +24,8 @@
         line-height: 1.9;
         background-color: #1C2526;
         color: #FFFFFF;
+        margin: 0; /* Ensure no default margin */
+        position: relative; /* Allow positioning of particle background */
     }
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Inter', sans-serif;
@@ -52,6 +54,7 @@
         background: #1C2526;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         padding: 1rem 0;
+        z-index: 1000; /* Ensure navbar stays above particles */
     }
     .navbar-brand {
         font-weight: 700;
@@ -146,6 +149,8 @@
         padding: 2rem 0;
         font-size: 0.9rem;
         border-top: 1px solid #2C3E50;
+        position: relative; /* Ensure footer stays above particles */
+        z-index: 10; /* Above particle layer */
     }
     .form-control {
         border-radius: 8px;
@@ -180,6 +185,16 @@
         margin-top: 1rem;
         font-size: 0.9rem;
     }
+    /* Particle Background Styling */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Behind all content */
+        background-color: #1C2526; /* Match body background */
+    }
     @media (max-width: 576px) {
         .service-card {
             padding: 1rem;
@@ -191,6 +206,9 @@
 </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" role="navigation" aria-label="Main navigation">
         <div class="container">
@@ -359,9 +377,67 @@
     <script>AOS.init();</script>
     <!-- reCAPTCHA Script -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- Form Submission and Interactivity -->
     <script>
         $(document).ready(function() {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#D3D3D3' }, // Light gray to match theme
+                    shape: {
+                        type: 'circle',
+                        stroke: { width: 0, color: '#000000' },
+                        polygon: { nb_sides: 5 }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#D3D3D3',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'repulse' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 400, line_linked: { opacity: 1 } },
+                        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                        repulse: { distance: 200, duration: 0.4 },
+                        push: { particles_nb: 4 },
+                        remove: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+
             // Smooth scrolling
             $('.nav-link').click(function(e) {
                 e.preventDefault();
