@@ -357,9 +357,9 @@
                         <button type="submit" class="btn btn-primary mt-3">Send Message</button>
                     </form>
                 </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- Footer -->
     <footer class="text-center">
@@ -431,7 +431,20 @@
                         grab: { distance: 400, line_linked: { opacity: 1 } },
                         bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
                         repulse: { distance: 200, duration: 0.4 },
-                        push: { particles_nb: 4 },
+                        push: { 
+                            particles_nb: 4,
+                            // Custom function to spawn particles at mouse position
+                            custom: function(pJS) {
+                                document.getElementById('particles-js').addEventListener('click', function(e) {
+                                    pJS.particles.array.push(
+                                        new pJS.particles.particle(
+                                            e.clientX - pJS.canvas.el.getBoundingClientRect().left,
+                                            e.clientY - pJS.canvas.el.getBoundingClientRect().top
+                                        )
+                                    );
+                                });
+                            }
+                        },
                         remove: { particles_nb: 2 }
                     }
                 },
