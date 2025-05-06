@@ -22,26 +22,26 @@
     body {
         font-family: 'Inter', sans-serif;
         line-height: 1.9;
-        background-color: #1C2526;
-        color: #FFFFFF;
-        margin: 0; /* Ensure no default margin */
-        position: relative; /* Allow positioning of particle background */
+        background-color: #121F2B;
+        color: #F5F7FA;
+        margin: 0;
+        position: relative;
     }
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Inter', sans-serif;
         font-weight: 700;
-        color: #FFFFFF;
+        color: #F5F7FA;
     }
-    p, a, li, .card-text {
+    p, a, li, Pilgrimage {
         font-family: 'Inter', sans-serif;
         font-weight: 400;
-        color: #D3D3D3;
+        color: #B0B8C4;
     }
     .hero, .service-card {
-        background: linear-gradient(135deg, #2C3E50 0%, #1C2526 100%);
+        background: linear-gradient(135deg, #1E2A3C 0%, #121F2B 100%);
         animation: gradient 15s ease infinite;
         background-size: 200% 200%;
-        color: #FFFFFF;
+        color: #F5F7FA;
         padding: 6rem 0;
         text-align: center;
     }
@@ -51,28 +51,28 @@
         100% { background-position: 0% 50%; }
     }
     .navbar {
-        background: #1C2526;
+        background: #121F2B;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         padding: 1rem 0;
-        z-index: 1000; /* Ensure navbar stays above particles */
+        z-index: 1000;
     }
     .navbar-brand {
         font-weight: 700;
-        color: #FFFFFF !important; /* White for all screen sizes */
+        color: #F5F7FA !important;
     }
     .nav-link {
-        color: #D3D3D3 !important;
+        color: #B0B8C4 !important;
         font-weight: 600;
         transition: color 0.3s;
     }
     .nav-link:hover, .nav-link.active {
-        color: #2C3E50 !important;
+        color: #3B82F6 !important;
     }
     .navbar-toggler {
-        border: none; /* Remove default border */
+        border: none;
     }
     .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* White icon for all screen sizes */
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
     .section-padding {
         padding: 5rem 0;
@@ -83,7 +83,7 @@
     .lead {
         font-size: 1.25rem;
         font-weight: 400;
-        color: #D3D3D3;
+        color: #B0B8C4;
     }
     .service-card {
         border: none;
@@ -102,13 +102,13 @@
     .service-card .btn-outline-primary,
     .service-card p,
     .service-card strong {
-        color: #FFFFFF !important; /* All text in service cards is white */
+        color: #F5F7FA !important;
     }
     .service-card i {
-        color: #8B0000 !important; /* Dark red for service icons */
+        color: #3B82F6 !important;
     }
     .btn-primary {
-        background: #2C3E50;
+        background: #3B82F6;
         border: none;
         padding: 0.75rem 1.5rem;
         font-weight: 600;
@@ -116,7 +116,7 @@
         overflow: hidden;
     }
     .btn-primary:hover {
-        background: #1F2A3C;
+        background: #60A5FA;
     }
     .btn-primary::after {
         content: '';
@@ -135,41 +135,41 @@
         100% { width: 200px; height: 200px; opacity: 0; }
     }
     .btn-outline-primary {
-        border-color: #FFFFFF;
-        color: #FFFFFF;
+        border-color: #F5F7FA;
+        color: #F5F7FA;
     }
     .btn-outline-primary:hover {
-        background: #2C3E50;
-        color: #FFFFFF;
-        border-color: #2C3E50;
+        background: #3B82F6;
+        color: #F5F7FA;
+        border-color: #3B82F6;
     }
     footer {
-        background: #1C2526;
-        color: #D3D3D3;
+        background: #121F2B;
+        color: #B0B8C4;
         padding: 2rem 0;
         font-size: 0.9rem;
-        border-top: 1px solid #2C3E50;
-        position: relative; /* Ensure footer stays above particles */
-        z-index: 10; /* Above particle layer */
+        border-top: 1px solid #1E2A3C;
+        position: relative;
+        z-index: 10;
     }
     .form-control {
         border-radius: 8px;
-        border: 1px solid #D3D3D3;
-        background: #2A3435;
-        color: #FFFFFF;
+        border: 1px solid #B0B8C4;
+        background: #1E2A3C;
+        color: #F5F7FA;
     }
     .form-control:focus {
-        border-color: #2C3E50;
-        box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-        background: #2A3435;
-        color: #FFFFFF;
+        border-color: #3B82F6;
+        box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+        background: #1E2A3C;
+        color: #F5F7FA;
     }
     .form-control::placeholder {
         color: #A0A0A0;
     }
     .recaptcha-container {
-        background: #2A3435;
-        border: 1px solid #D3D3D3;
+        background: #1E2A3C;
+        border: 1px solid #B0B8C4;
         border-radius: 8px;
         padding: 1rem;
         margin-bottom: 1.5rem;
@@ -177,7 +177,7 @@
     }
     .recaptcha-container label {
         font-size: 0.9rem;
-        color: #D3D3D3;
+        color: #B0B8C4;
         margin-bottom: 0.5rem;
         display: block;
     }
@@ -185,15 +185,14 @@
         margin-top: 1rem;
         font-size: 0.9rem;
     }
-    /* Particle Background Styling */
     #particles-js {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1; /* Behind all content */
-        background-color: #1C2526; /* Match body background */
+        z-index: -1;
+        background-color: #121F2B;
     }
     @media (max-width: 576px) {
         .service-card {
@@ -351,15 +350,15 @@
                         <div class="mb-3">
                             <textarea name="message" class="form-control" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <label for="g-recaptcha" style="font-size: 0.9rem; color: #D3D3D3; margin-bottom: 0.5rem; display: block;">Verify you're not a robot</label>
+                        <label for="g-recaptcha" style="font-size: 0.9rem; color: #B0B8C4; margin-bottom: 0.5rem; display: block;">Verify you're not a robot</label>
                         <div class="g-recaptcha" data-sitekey="6LeQUQIrAAAAAACsN7PlbGFM9abDEz61ZSDVAOdD"></div>
                         <div id="form-message" class="form-message d-none"></div>
                         <button type="submit" class="btn btn-primary mt-3">Send Message</button>
                     </form>
                 </div>
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="text-center">
@@ -386,7 +385,7 @@
             particlesJS('particles-js', {
                 particles: {
                     number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: '#D3D3D3' }, // Light gray to match theme
+                    color: { value: '#B0B8C4' },
                     shape: {
                         type: 'circle',
                         stroke: { width: 0, color: '#000000' },
@@ -405,7 +404,7 @@
                     line_linked: {
                         enable: true,
                         distance: 150,
-                        color: '#D3D3D3',
+                        color: '#B0B8C4',
                         opacity: 0.4,
                         width: 1
                     },
@@ -433,7 +432,6 @@
                         repulse: { distance: 200, duration: 0.4 },
                         push: { 
                             particles_nb: 4,
-                            // Custom function to spawn particles at mouse position
                             custom: function(pJS) {
                                 document.getElementById('particles-js').addEventListener('click', function(e) {
                                     pJS.particles.array.push(
