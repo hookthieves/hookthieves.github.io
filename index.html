@@ -42,7 +42,7 @@
         padding: 5rem 0;
         text-align: center;
     }
-    .service-card {
+    .service-card, .testimonial-card {
         background: linear-gradient(135deg, #1E2A3C 0%, #121F2B 100%);
         animation: gradient 15s ease infinite;
         background-size: 200% 200%;
@@ -93,7 +93,7 @@
         font-weight: 400;
         color: #B0B8C4;
     }
-    .service-card:hover {
+    .service-card:hover, .testimonial-card:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
         opacity: 0.95;
@@ -102,10 +102,13 @@
     .service-card .card-text,
     .service-card .btn-outline-primary,
     .service-card p,
-    .service-card strong {
+    .service-card strong,
+    .testimonial-card .card-text,
+    .testimonial-card p,
+    .testimonial-card strong {
         color: #F5F7FA !important;
     }
-    .service-card i {
+    .service-card i, .testimonial-card i {
         color: #3B82F6 !important;
     }
     .btn-primary {
@@ -196,7 +199,7 @@
         background-color: #121F2B;
     }
     @media (max-width: 576px) {
-        .service-card {
+        .service-card, .testimonial-card {
             padding: 1rem;
         }
         .recaptcha-container {
@@ -220,6 +223,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-shield-alt me-1"></i>Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fas fa-star me-1"></i>Testimonials</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
                 </ul>
             </div>
@@ -310,6 +314,24 @@
                             <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
                             <p><strong>Options:</strong> One-time breach assessment</p>
                             <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials SectionSection -->
+    <section id="testimonials" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Customers Say</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card testimonial-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-quote mb-3" style="font-size: 2rem;"></i>
+                            <p class="card-text">"Abound Communities was delighted to have Cuong from CN Security Consulting on board to review our Information security requirements. Cuong thoroughly understood the business needs and provided our report in a very timely manner. His professionalism and attention to detail was exceptional. We would gladly recommend CN Security Consulting for your technology security needs."</p>
+                            <p><strong>Kathryn Lewis, Executive Assistant to CEO - Abound Communities</strong></p>
                         </div>
                     </div>
                 </div>
