@@ -66,7 +66,7 @@
                 XOR encryption is a lightweight, reversible operation that’s ideal for obfuscating data in malware development. By applying a single-byte key (e.g., <code>0x5A</code>), it transforms shellcode and strings into an unrecognizable form, preventing static detection by AV/EDR systems that rely on signature matching. At runtime, the same key is used to decrypt the data, restoring it for execution. This simplicity, combined with its effectiveness against static analysis, makes XOR encryption a go-to technique for security researchers crafting evasive payloads.
             </p>
             <p class="mb-4">
-                The <code>encrypt.c</code> tool automates the encryption of shellcode and wide-character strings (e.g., process paths), outputting C-style arrays that can be directly integrated into projects like the process hypnosis implementation.
+                The <code>main.c</code> tool automates the encryption of shellcode and wide-character strings (e.g., process paths), outputting C-style arrays that can be directly integrated into projects like the process hypnosis implementation.
             </p>
         </section>
 
@@ -92,7 +92,7 @@
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Code Overview</h2>
             <p class="mb-4">
-                The <code>encrypt.c</code> file implements the following workflow:
+                The <code>main.c</code> file implements the following workflow:
             </p>
             <ol class="list-decimal list-inside mb-4">
                 <li><strong>Input Definition</strong>: Defines a sample shellcode array and a target process path (e.g., <code>C:\Windows\System32\notepad.exe</code>).</li>
@@ -119,7 +119,7 @@ void XorEncryptBytes(const unsigned char* input, size_t len, unsigned char key, 
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Synergy with Process Hypnosis</h2>
             <p class="mb-4">
-                This encryption tool is designed to work hand-in-hand with the process hypnosis technique. In the <a href="ProcessHypnosis.html">process hypnosis implementation</a>, the shellcode is stored in an encrypted form (<code>EncryptedX64CalcShellcode</code>) and decrypted at runtime using a matching <code>DecryptShellcode</code> function. The <code>encrypt.c</code> tool generates this encrypted shellcode array, ensuring that the payload remains obfuscated until execution. Similarly, encrypting the target process path (e.g., <code>svchost.exe</code>) prevents static analysis tools from flagging hardcoded strings.
+                This encryption tool is designed to work hand-in-hand with the process hypnosis technique. In the <a href="ProcessHypnosis.html">process hypnosis implementation</a>, the shellcode is stored in an encrypted form (<code>EncryptedX64CalcShellcode</code>) and decrypted at runtime using a matching <code>DecryptShellcode</code> function. The <code>main.c</code> tool generates this encrypted shellcode array, ensuring that the payload remains obfuscated until execution. Similarly, encrypting the target process path (e.g., <code>svchost.exe</code>) prevents static analysis tools from flagging hardcoded strings.
             </p>
             <p class="mb-4">
                 By combining these tools, researchers can:
@@ -134,10 +134,10 @@ void XorEncryptBytes(const unsigned char* input, size_t len, unsigned char key, 
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Usage Example</h2>
             <p class="mb-4">
-                To use the tool, compile and run <code>encrypt.c</code> with your desired shellcode and target path. For example:
+                To use the tool, compile and run <code>main.c</code> with your desired shellcode and target path. For example:
             </p>
             <pre>
-gcc encrypt.c -o encrypt.exe
+gcc main.c -o encrypt.exe
 ./encrypt.exe
             </pre>
             <p class="mb-4">
@@ -186,7 +186,7 @@ const WCHAR EncryptedTargetPath[] = {
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Resources</h2>
             <ul class="list-disc list-inside mb-4">
-                <li><a href="https://maldevacademy.com/modules/17?all_modules=1n">XOR Encyrption</a></li>
+                <li><a href="https://maldevacademy.com/modules/17?all_modules=1n">Maldev Academy - XOR Encyrption</a></li>
             </ul>
         </section>
 
