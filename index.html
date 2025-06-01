@@ -198,6 +198,23 @@
         z-index: -1;
         background-color: #121F2B;
     }
+    /* Dropdown menu styling */
+    .dropdown-menu {
+        background: #1E2A3C;
+        border: 1px solid #B0B8C4;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .dropdown-item {
+        color: #B0B8C4 !important;
+        font-weight: 400;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .dropdown-item:hover {
+        background: #3B82F6;
+        color: #F5F7FA !important;
+    }
     @media (max-width: 576px) {
         .service-card, .testimonial-card {
             padding: 1rem;
@@ -224,6 +241,14 @@
                     <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-shield-alt me-1"></i>Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fas fa-star me-1"></i>Testimonials</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="blogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-blog me-1"></i>Blog
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="blogDropdown">
+                            <li><a class="dropdown-item" href="ProcessHypnosis.html">Exploring Evasive Process Hypnosis</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
                 </ul>
             </div>
@@ -321,7 +346,7 @@
         </div>
     </section>
 
-    <!-- Testimonials SectionSection -->
+    <!-- Testimonials Section -->
     <section id="testimonials" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
         <div class="container">
             <h2 class="text-center mb-5">What Our Customers Say</h2>
@@ -476,11 +501,13 @@
             $('.nav-link').click(function(e) {
                 e.preventDefault();
                 const target = $(this).attr('href');
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top - 60
-                }, 800);
-                $('.nav-link').removeClass('active');
-                $(this).addClass('active');
+                if (target.startsWith('#')) {
+                    $('html, body').animate({
+                        scrollTop: $(target).offset().top - 60
+                    }, 800);
+                    $('.nav-link').removeClass('active');
+                    $(this).addClass('active');
+                }
             });
 
             // Form submission
