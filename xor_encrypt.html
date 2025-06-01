@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XOR Encryption for Evasive Malware: A Companion to Process Hypnosis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1, h2, h3 {
+            color: #1a202c;
+        }
+        code {
+            background-color: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        a {
+            color: #2b6cb0;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #1a4971;
+        }
+        .post-date {
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-6">XOR Encryption Tool</h1>
+        <p class="post-date">Published on June 6, 2025</p>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+            <p class="mb-4">
+                In my previous post, <a href="ProcessHypnosis.html">Exploring Evasive Process Hypnosis</a>, I discussed a stealthy process injection technique that leverages APC injection, dynamic process selection, and XOR-encrypted shellcode to evade detection. A critical component of that evasion strategy is the encryption of payloads to avoid static analysis by antivirus (AV) and endpoint detection and response (EDR) systems. In this post, I dive into a companion tool—a simple yet effective XOR encryption utility, available in my <code>main.c</code> file—that prepares shellcode and strings for use in evasive malware techniques like process hypnosis. This blog explores the code’s functionality, its role in enhancing evasion, and its synergy with process injection.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Why XOR Encryption?</h2>
+            <p class="mb-4">
+                XOR encryption is a lightweight, reversible operation that’s ideal for obfuscating data in malware development. By applying a single-byte key (e.g., <code>0x5A</code>), it transforms shellcode and strings into an unrecognizable form, preventing static detection by AV/EDR systems that rely on signature matching. At runtime, the same key is used to decrypt the data, restoring it for execution. This simplicity, combined with its effectiveness against static analysis, makes XOR encryption a go-to technique for security researchers crafting evasive payloads.
+            </p>
+            <p class="mb-4">
+                The <code>encrypt.c</code> tool automates the encryption of shellcode and wide-character strings (e.g., process paths), outputting C-style arrays that can be directly integrated into projects like the process hypnosis implementation.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Key Features of the Encryption Tool</h2>
+
+            <h3 class="text-xl font-medium mb-2">1. XOR Encryption for Bytes and Strings</h3>
+            <p class="mb-4">
+                The tool provides two functions: <code>XorEncryptBytes</code> for encrypting byte arrays (e.g., shellcode) and <code>XorEncryptWString</code> for encrypting wide-character strings (e.g., process paths like <code>C:\Windows\System32\notepad.exe</code>). Both use the same XOR key (<code>0x5A</code>) to ensure compatibility with the decryption logic in the process hypnosis code.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">2. C-Style Array Output</h3>
+            <p class="mb-4">
+                The <code>PrintByteArray</code> and <code>PrintWCharArray</code> functions format the encrypted data as C-style arrays, making it easy to copy-paste the output into other C programs. For example, encrypting a shellcode array produces a <code>const unsigned char EncryptedShellcode[]</code> array, ready for inclusion in <code>main.c</code>.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">3. Memory Safety</h3>
+            <p class="mb-4">
+                The tool uses dynamic memory allocation (<code>malloc</code>) for encrypted buffers and ensures proper cleanup with <code>free</code>, preventing memory leaks and maintaining robustness.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Code Overview</h2>
+            <p class="mb-4">
+                The <code>encrypt.c</code> file implements the following workflow:
+            </p>
+            <ol class="list-decimal list-inside mb-4">
+                <li><strong>Input Definition</strong>: Defines a sample shellcode array and a target process path (e.g., <code>C:\Windows\System32\notepad.exe</code>).</li>
+                <li><strong>Memory Allocation</strong>: Allocates buffers for the encrypted shellcode and string.</li>
+                <li><strong>Encryption</strong>: Applies XOR encryption using <code>XorEncryptBytes</code> and <code>XorEncryptWString</code> with the key <code>0x5A</code>.</li>
+                <li><strong>Output Formatting</strong>: Prints the encrypted data as C-style arrays using <code>PrintByteArray</code> and <code>PrintWCharArray</code>.</li>
+                <li><strong>Cleanup</strong>: Frees allocated memory to prevent leaks.</li>
+            </ol>
+            <p class="mb-4">
+                Here’s a snippet of the core encryption logic:
+            </p>
+            <pre>
+void XorEncryptBytes(const unsigned char* input, size_t len, unsigned char key, unsigned char* output) {
+    for (size_t i = 0; i < len; i++) {
+        output[i] = input[i] ^ key;
+    }
+}
+            </pre>
+            <p class="mb-4">
+                The code is available in my <a href="#">repository</a>, alongside the process hypnosis implementation and a <code>README.md</code> for compilation and usage instructions.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Synergy with Process Hypnosis</h2>
+            <p class="mb-4">
+                This encryption tool is designed to work hand-in-hand with the process hypnosis technique. In the <a href="ProcessHypnosis.html">process hypnosis implementation</a>, the shellcode is stored in an encrypted form (<code>EncryptedX64CalcShellcode</code>) and decrypted at runtime using a matching <code>DecryptShellcode</code> function. The <code>encrypt.c</code> tool generates this encrypted shellcode array, ensuring that the payload remains obfuscated until execution. Similarly, encrypting the target process path (e.g., <code>svchost.exe</code>) prevents static analysis tools from flagging hardcoded strings.
+            </p>
+            <p class="mb-4">
+                By combining these tools, researchers can:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>Evade Static Detection</strong>: Encrypted payloads and strings avoid signature-based detection.</li>
+                <li><strong>Enhance FUD</strong>: Obfuscated data creates uncertainty for defenders, making it harder to classify the code as malicious.</li>
+                <li><strong>Streamline Workflow</strong>: The tool automates the encryption process, saving time when preparing payloads for injection.</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Usage Example</h2>
+            <p class="mb-4">
+                To use the tool, compile and run <code>encrypt.c</code> with your desired shellcode and target path. For example:
+            </p>
+            <pre>
+gcc encrypt.c -o encrypt.exe
+./encrypt.exe
+            </pre>
+            <p class="mb-4">
+                The output will be C-style arrays like:
+            </p>
+            <pre>
+const unsigned char EncryptedShellcode[] = {
+    0xA6, 0x12, 0xD9, 0xBE, ...
+};
+const WCHAR EncryptedTargetPath[] = {
+    0x0067, 0x005C, ...
+};
+            </pre>
+            <p class="mb-4">
+                Copy these arrays into your process hypnosis code, and use the corresponding decryption logic to restore the data at runtime.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Ethical Considerations</h2>
+            <p class="mb-4">
+                As with the process hypnosis technique, this encryption tool is for <strong>educational purposes only</strong>. While it’s a valuable asset for understanding malware evasion techniques, it must be used responsibly. Always obtain explicit authorization before testing in any environment, as unauthorized use may violate legal or ethical guidelines. I bear no responsibility for misuse of this code.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Future Improvements</h2>
+            <p class="mb-4">
+                The current implementation is simple and effective, but there’s room for enhancement:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>Dynamic Keys</strong>: Use a randomly generated XOR key for each run to increase entropy.</li>
+                <li><strong>Multi-Layer Encryption</strong>: Combine XOR with other algorithms (e.g., AES) for stronger obfuscation.</li>
+                <li><strong>Input Flexibility</strong>: Accept shellcode or strings from files or command-line arguments for greater usability.</li>
+                <li><strong>Obfuscation Detection</strong>: Add checks to detect if the output arrays are being scanned by static analysis tools.</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Conclusion</h2>
+            <p class="mb-4">
+                The XOR encryption tool in <code>main.c</code> is a critical companion to evasive techniques like process hypnosis. By obfuscating shellcode and strings, it enhances the stealth of malware simulations, making them harder to detect. When paired with the process hypnosis implementation, it forms a powerful toolkit for security researchers studying advanced evasion tactics. Check out the full code in my <a href="https://github.com/hookthieves/xor_encrypt/tree/main">repository</a>, and stay tuned for more insights into offensive security techniques!
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Resources</h2>
+            <ul class="list-disc list-inside mb-4">
+                <li><a href="https://maldevacademy.com/modules/17?all_modules=1n">XOR Encyrption</a></li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <p class="italic">
+                <strong>Disclaimer:</strong> This content is for educational purposes only. Always comply with legal and ethical guidelines when conducting security research.
+            </p>
+        </section>
+    </div>
+</body>
+</html>
