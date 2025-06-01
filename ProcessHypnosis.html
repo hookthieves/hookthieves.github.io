@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evasive Process Hypnosis: Stealthy Shellcode Injection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1, h2, h3 {
+            color: #1a202c;
+        }
+        code {
+            background-color: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        a {
+            color: #2b6cb0;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #1a4971;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-6">Exploring Evasive Process Hypnosis: A Deep Dive into Stealthy Shellcode Injection</h1>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+            <p class="mb-4">
+                In the ever-evolving landscape of cybersecurity, process injection remains a cornerstone technique for both attackers and defenders. As a security researcher, I’ve developed an advanced process hypnosis technique that pushes the boundaries of evasion, incorporating elements of Fear, Uncertainty, and Doubt (FUD) to bypass modern detection mechanisms. This blog post explores the implementation of this technique, available in my <code>main.c</code> file, and breaks down its key components, evasion strategies, and ethical considerations.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">What is Process Hypnosis?</h2>
+            <p class="mb-4">
+                Process hypnosis is a term often used to describe advanced process injection techniques that manipulate a target process to execute malicious or research-oriented code stealthily. Unlike traditional injection methods, such as <code>WriteProcessMemory</code> with thread hijacking, process hypnosis aims to blend into the target environment, making detection by antivirus (AV) or endpoint detection and response (EDR) systems significantly harder.
+            </p>
+            <p class="mb-4">
+                The technique I’ve developed leverages <strong>APC (Asynchronous Procedure Call) injection</strong>, <strong>XOR-encrypted shellcode</strong>, <strong>dynamic process selection</strong>, and <strong>anti-debugging checks</strong> to create a robust and evasive injection framework. Let’s dive into the technical details.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Key Features of the Implementation</h2>
+
+            <h3 class="text-xl font-medium mb-2">1. Shellcode Obfuscation</h3>
+            <p class="mb-4">
+                To avoid static detection, the shellcode (a simple <code>calc.exe</code> launcher for demonstration) is XOR-encrypted with a key (<code>0x5A</code>) at compile time. At runtime, the <code>DecryptShellcode</code> function decrypts it just before injection. This ensures that the raw shellcode never appears in memory in its unencrypted form until absolutely necessary, reducing the likelihood of signature-based detection by AV/EDR systems.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">2. Dynamic Process Selection</h3>
+            <p class="mb-4">
+                Hardcoding a target process like <code>notepad.exe</code> is a red flag for defenders. Instead, the code uses <code>CreateToolhelp32Snapshot</code> to enumerate running processes and dynamically selects a common process, such as <code>svchost.exe</code> or <code>explorer.exe</code>. By blending in with legitimate system processes, the technique minimizes suspicion and reduces the chance of detection.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">3. APC Injection</h3>
+            <p class="mb-4">
+                The core of the evasion lies in using APC injection. Instead of directly modifying a thread’s context or suspending it, the code allocates memory in the target process using <code>VirtualAllocEx</code> and queues an APC via <code>QueueUserAPC</code>. The APC executes the shellcode when the target thread enters an alertable state, making the injection less intrusive and harder to detect compared to traditional methods.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">4. Anti-Debugging Measures</h3>
+            <p class="mb-4">
+                To thwart analysis, the code includes an <code>IsDebuggerPresentEnhanced</code> function that checks for debuggers using both <code>IsDebuggerPresent</code> and <code>CheckRemoteDebuggerPresent</code>. If a debugger is detected, the program exits gracefully, preventing analysts from stepping through the code.
+            </p>
+
+            <h3 class="text-xl font-medium mb-2">5. Resource Cleanup</h3>
+            <p class="mb-4">
+                To minimize forensic footprints, the implementation ensures proper cleanup of allocated memory (<code>VirtualFreeEx</code>) and handles (<code>CloseHandle</code>). This reduces the evidence left behind, making it harder for defenders to reconstruct the attack.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Code Overview</h2>
+            <p class="mb-4">
+                The <code>main.c</code> file implements the following workflow:
+            </p>
+            <ol class="list-decimal list-inside mb-4">
+                <li><strong>Debugger Check</strong>: Verifies if a debugger is present. If so, the program exits.</li>
+                <li><strong>Process Selection</strong>: Enumerates running processes and selects a suitable target (e.g., <code>svchost.exe</code>).</li>
+                <li><strong>Memory Allocation</strong>: Allocates executable memory in the target process.</li>
+                <li><strong>Shellcode Decryption</strong>: Decrypts the XOR-encrypted shellcode.</li>
+                <li><strong>APC Injection</strong>: Writes the shellcode to the target process and queues an APC to execute it.</li>
+                <li><strong>Cleanup</strong>: Closes handles and frees memory to minimize traces.</li>
+            </ol>
+            <p class="mb-4">
+                The code is available in my <a href="#">repository</a>, alongside a detailed <code>README.md</code> for compilation and usage instructions.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Why Evasion Matters</h2>
+            <p class="mb-4">
+                Modern AV and EDR solutions rely on a combination of signature-based detection, behavioral analysis, and heuristics. By encrypting the shellcode, targeting common processes, and using APC injection, this technique evades:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>Signature-Based Detection</strong>: The encrypted shellcode avoids matching known malicious patterns.</li>
+                <li><strong>Behavioral Analysis</strong>: APC injection is less likely to trigger alerts compared to thread suspension or direct memory writes.</li>
+                <li><strong>Heuristics</strong>: Dynamic process selection and anti-debugging make the behavior appear less suspicious.</li>
+            </ul>
+            <p class="mb-4">
+                These evasion tactics create FUD, making it harder for defenders to confidently classify the activity as malicious.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Ethical Considerations</h2>
+            <p class="mb-4">
+                As a security researcher, I must emphasize that this code is for <strong>educational purposes only</strong>. Process injection techniques, while valuable for understanding attacker methodologies, can be misused. Always ensure you have explicit authorization before testing such techniques in any environment. Unauthorized use may violate laws or regulations, and I bear no responsibility for misuse.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Future Improvements</h2>
+            <p class="mb-4">
+                While the current implementation is robust, there’s always room for enhancement:
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>Polymorphic Shellcode</strong>: Generate unique shellcode for each execution to further evade signatures.</li>
+                <li><strong>Thread State Manipulation</strong>: Ensure the target thread enters an alertable state to guarantee APC execution.</li>
+                <li><strong>Advanced Anti-Debugging</strong>: Incorporate techniques like timing checks or hardware breakpoints to detect sophisticated debuggers.</li>
+                <li><strong>Obfuscated Strings</strong>: Encrypt or obfuscate strings like process names to avoid static analysis.</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Conclusion</h2>
+            <p class="mb-4">
+                This evasive process hypnosis technique demonstrates the power of combining obfuscation, dynamic targeting, and stealthy injection methods. By understanding and responsibly experimenting with such techniques, security researchers can better prepare for real-world threats and contribute to stronger defenses.
+            </p>
+            <p class="mb-4">
+                Check out the full implementation in my <a href="#">repository</a>, and feel free to share feedback or suggestions. Let’s keep pushing the boundaries of cybersecurity research—ethically and responsibly!
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Resources</h2>
+            <ul class="list-disc list-inside mb-4">
+                <li><a href="#">Repository with main.c and README.md</a></li>
+                <li><a href="https://docs.microsoft.com/en-us/windows/win32/api/">Windows API Documentation</a></li>
+                <li><a href="https://www.ired.team/offensive-security/code-injection-process-injection">Process Injection Techniques</a></li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <p class="italic">
+                <strong>Disclaimer:</strong> This content is for educational purposes only. Always comply with legal and ethical guidelines when conducting security research.
+            </p>
+        </section>
+    </div>
+</body>
+</html>
