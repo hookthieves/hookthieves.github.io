@@ -1,0 +1,143 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring the Process Hypnosis Injection Technique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background-color: #e0e0e0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .disclaimer {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exploring the Process Hypnosis Injection Technique</h1>
+    <h2>Introduction</h2>
+    <p>Process hypnosis is a shellcode injection technique that leverages the Windows debugging API to inject and execute arbitrary code in a target process. By creating a process in a debugged state, this method allows precise control over the target’s execution flow, enabling stealthy code injection. In this blog post, we’ll dive into how process hypnosis works, explore an implementation that uses XOR encryption for obfuscation, and discuss its implications for security research.</p>
+
+    <h2>What is Process Hypnosis?</h2>
+    <p>Process hypnosis refers to a technique where a parent process creates a child process (e.g., <code>notepad.exe</code>) in a debugged state using the <code>CreateProcessW</code> API with the <code>DEBUG_ONLY_THIS_PROCESS</code> flag. The parent acts as a debugger, monitoring debug events such as thread creation. When a <code>CREATE_THREAD_DEBUG_EVENT</code> occurs, the parent injects shellcode into the new thread’s start address using <code>WriteProcessMemory</code>, then detaches, allowing the child to execute the injected code.</p>
+    <p>This method is stealthy because it manipulates the target process at an early stage, before its main execution logic begins, and avoids common injection techniques like <code>CreateRemoteThread</code> that are heavily monitored by security software.</p>
+
+    <h2>Implementation Overview</h2>
+    <p>Our implementation targets <code>notepad.exe</code> and injects a shellcode that launches <code>calc.exe</code>. To enhance stealth, we apply XOR encryption to both the shellcode and the target process path (<code>C:\Windows\System32\notepad.exe</code>). Here’s how it works:</p>
+    <ul>
+        <li><strong>Compile-Time Encryption</strong>: The shellcode and target path are encrypted using a simple XOR operation with a key (e.g., <code>0x5A</code>). The encrypted arrays are embedded in the binary, obscuring them from static analysis.</li>
+        <li><strong>Runtime Decryption</strong>: At runtime, the program allocates memory, copies the encrypted data, and decrypts it using the same XOR key. The decrypted shellcode and path are then used for injection and process creation.</li>
+        <li><strong>Process Creation</strong>: <code>CreateProcessW</code> launches <code>notepad.exe</code> in debug mode.</li>
+        <li><strong>Shellcode Injection</strong>: During the <code>CREATE_THREAD_DEBUG_EVENT</code>, the decrypted shellcode is written to the thread’s start address.</li>
+        <li><strong>Debugger Detachment</strong>: The debugger detaches using <code>DebugActiveProcessStop</code>, allowing the shellcode to execute.</li>
+    </ul>
+
+    <h3>Sample Code Snippet</h3>
+    <pre>
+<code>
+// Decrypt shellcode
+unsigned char* DecryptedShellcode = (unsigned char*)malloc(sizeof(EncryptedShellcode));
+memcpy(DecryptedShellcode, EncryptedShellcode, sizeof(EncryptedShellcode));
+XorDecryptBytes(DecryptedShellcode, sizeof(EncryptedShellcode), XOR_KEY);
+
+// Create process
+if (!CreateProcessW(szTargetProcess, NULL, NULL, NULL, FALSE, DEBUG_ONLY_THIS_PROCESS, NULL, NULL, &StartupInfo, &ProcessInfo)) {
+    printf("[!] CreateProcessW Failed With Error: %d \n", GetLastError());
+}
+</code>
+    </pre>
+
+    <h2>Why XOR Encryption?</h2>
+    <p>XOR encryption is lightweight and effective for basic obfuscation. By storing the shellcode and target path in encrypted form, we reduce the risk of detection by antivirus tools that scan for known strings or patterns. For example, the plain-text string <code>calc</code> in the shellcode or <code>notepad.exe</code> in the path could trigger alerts, but their encrypted versions are less recognizable.</p>
+
+    <h2>Security Considerations</h2>
+    <p>While process hypnosis is stealthy, it has limitations:</p>
+    <ul>
+        <li><strong>Weak XOR Encryption</strong>: XOR with a static key is easily reversible if analyzed. Consider using stronger encryption like AES for production environments.</li>
+        <li><strong>Anti-Debugging Detection</strong>: The use of the debugging API may be flagged by modern security software with anti-debugging capabilities.</li>
+        <li><strong>Runtime Detection</strong>: Dynamic analysis tools can detect the shellcode execution, especially if it performs recognizable actions like launching <code>calc.exe</code>.</li>
+    </ul>
+    <p>To improve stealth, you could:</p>
+    <ul>
+        <li>Use dynamic XOR keys or more complex encryption.</li>
+        <li>Implement anti-debugging techniques to evade detection.</li>
+        <li>Employ shellcode polymorphism to vary the shellcode’s signature.</li>
+    </ul>
+
+    <h2>Acknowledgements</h2>
+        <li><a href="https://medium.com/@s12deff/process-hypnosis-injection-technique-58e9901ae2cc">S12-H4CK blog post</a></li>
+        <li><a href="https://maldevacademy.com/all/modules">MalDev Academy for the PoC</a></li>
+
+    
+    <h2>Conclusion</h2>
+    <p>The process hypnosis injection technique is an interesting method for shellcode injection, leveraging the Windows debugging API for precision and stealth. I want to applaud the work of Maldev Academy by providing me with their PoC to use as a template to learn and better my research. By adding XOR encryption, I’ve enhanced its resistance to static analysis while maintaining functionality.</p>
+    <p>For the full source code and usage instructions, check out the <a href="https://github.com/hookthieves/Process_hypnosis/tree/main">GitHub repository</a>.</p>
+    <p class="disclaimer">Disclaimer: This content is for educational purposes only. Unauthorized use of process injection techniques may violate laws and ethical guidelines. Use responsibly in controlled environments.</p>
+</body>
+</html>
