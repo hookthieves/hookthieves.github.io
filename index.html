@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CN Security Consulting Pty Ltd offers offensive security services like phishing, red teaming, and WiFi exploitation in Melbourne, Australia.">
+    <meta name="keywords" content="cybersecurity, offensive security, penetration testing, red teaming, Melbourne">
+    <meta name="author" content="Cuong Nguyen">
+    <title>CN Security Consulting Pty Ltd</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.9;
+        background-color: #121F2B;
+        color: #F5F7FA;
+        margin: 0;
+        position: relative;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        color: #F5F7FA;
+    }
+    p, a, li, .card-text {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        color: #B0B8C4;
+    }
+    .hero {
+        color: #F5F7FA;
+        padding: 5rem 0;
+        text-align: center;
+    }
+    .service-card, .testimonial-card {
+        background: linear-gradient(135deg, #1E2A3C 0%, #121F2B 100%);
+        animation: gradient 15s ease infinite;
+        background-size: 200% 200%;
+        color: #F5F7FA;
+        padding: 2rem;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    }
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .navbar {
+        background: #121F2B;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        padding: 1rem 0;
+        z-index: 1000;
+    }
+    .navbar-brand {
+        font-weight: 700;
+        color: #F5F7FA !important;
+    }
+    .nav-link {
+        color: #B0B8C4 !important;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .nav-link:hover, .nav-link.active {
+        color: #3B82F6 !important;
+    }
+    .navbar-toggler {
+        border: none;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+    .section-padding {
+        padding: 5rem 0;
+    }
+    .hero h1 {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .lead {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #B0B8C4;
+    }
+    .service-card:hover, .testimonial-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        opacity: 0.95;
+    }
+    .service-card .card-title h5,
+    .service-card .card-text,
+    .service-card .btn-outline-primary,
+    .service-card p,
+    .service-card strong,
+    .testimonial-card .card-text,
+    .testimonial-card p,
+    .testimonial-card strong {
+        color: #F5F7FA !important;
+    }
+    .service-card i, .testimonial-card i {
+        color: #3B82F6 !important;
+    }
+    .btn-primary {
+        background: #3B82F6;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-primary:hover {
+        background: #60A5FA;
+    }
+    .btn-primary::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { width: 0; height: 0; opacity: 1; }
+        100% { width: 200px; height: 200px; opacity: 0; }
+    }
+    .btn-outline-primary {
+        border-color: #F5F7FA;
+        color: #F5F7FA;
+    }
+    .btn-outline-primary:hover {
+        background: #3B82F6;
+        color: #F5F7FA;
+        border-color: #3B82F6;
+    }
+    footer {
+        background: #121F2B;
+        color: #B0B8C4;
+        padding: 2rem 0;
+        font-size: 0.9rem;
+        border-top: 1px solid #1E2A3C;
+        position: relative;
+        z-index: 10;
+    }
+    .calendly-inline-widget {
+        background: #1E2A3C;
+        border: 1px solid #B0B8C4;
+        border-radius: 8px;
+        padding: 1rem;
+        min-width: 320px;
+        height: 640px;
+        overflow-y: auto;
+    }
+    @media (max-width: 576px) {
+        .service-card, .testimonial-card {
+            padding: 1rem;
+        }
+        .calendly-inline-widget {
+            padding: 0.5rem;
+            height: 1000px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#">CN Security Consulting Pty Ltd</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-shield-alt me-1"></i>Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fas fa-star me-1"></i>Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-in" data-aos-duration="1000">
+        <div class="container">
+            <h1 class="display-4 fw-bold">CN Security Consulting Pty Ltd</h1>
+            <p class="lead">Offensive security consulting based in Melbourne, Australia.</p>
+            <p>We offer cutting-edge cybersecurity services, including Offensive Phishing Operations, WiFi Exploitation, Red Teaming Simulations, and more.</p>
+            <a href="#contact" class="btn btn-primary mt-3">Get a Free Consultation</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">Cuong Nguyen</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <h3 class="h4">Principal Security Consultant</h3>
+                    <p>Over a decade of expertise in offensive cybersecurity | OSWP, OSCP, OSWA, OSWE Certified</p>
+                    <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
+                    <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+                    <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Services</h2>
+            <p class="text-center mb-5" style="color: #F5F7FA;">Discover our tailored offensive security solutions designed to test your systems, uncover vulnerabilities, and prepare your organization against sophisticated threats.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-lock mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Penetration Testing</strong></h3>
+                            <p class="card-text">Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
+                            <p><strong>Options:</strong> One-off 3-day breach or continuous retainer</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-code-slash mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Malware Development</strong></h3>
+                            <p class="card-text">The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
+                            <p><strong>Options:</strong> Single payload or recurring simulations</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-bullseye mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Red Teaming Simulation</strong></h3>
+                            <p class="card-text">Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
+                            <p><strong>Options:</strong> Standalone or persistent exercises</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-envelope mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>Offensive Phishing Operations</strong></h3>
+                            <p class="card-text">The offensive phishing operations service evaluates your organisation’s resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
+                            <p><strong>Options:</strong> Single strike or ongoing drills</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-wifi mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="card-title h5"><strong>WiFi Exploitation</strong></h3>
+                            <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
+                            <p><strong>Options:</strong> One-time breach assessment</p>
+                            <a href="#contact" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Customers Say</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card testimonial-card h-100">
+                        <div class="card-body text-center">
+                            <i class="bi bi-quote mb-3" style="font-size: 2rem;"></i>
+                            <p class="card-text">"Abound Communities was delighted to have Cuong from CN Security Consulting on board to review our Information security requirements. Cuong thoroughly understood the business needs and provided our report in a very timely manner. His professionalism and attention to detail was exceptional. We would gladly recommend CN Security Consulting for your technology security needs."</p>
+                            <p><strong>Kathryn Lewis, Executive Assistant to CEO - Abound Communities</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact Us</h2>
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <h4 class="mb-4">Contact Details</h4>
+                    <p><strong>Address:</strong> Melbourne VIC, Australia</p>
+                    <p><strong>Phone:</strong> <a href="tel:0422662044" class="text-decoration-none text-light">0422 662 044</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:cnsecconsultingptyltd@gmail.com" class="text-decoration-none text-light">cnsecconsultingptyltd@gmail.com</a></p>
+                    <p><strong>ABN:</strong> 90 706 059 463</p>
+                    <h5 class="mt-4">Operating Hours</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li>Monday: 5:00 PM - 10:00 PM</li>
+                        <li>Tuesday: 5:00 PM - 10:00 PM</li>
+                        <li>Wednesday: 5:00 PM - 10:00 PM</li>
+                        <li>Thursday: 5:00 PM - 10:00 PM</li>
+                        <li>Friday: 5:00 PM - 10:00 PM</li>
+                        <li>Saturday: 8:00 AM - 12:00 PM</li>
+                        <li>Sunday: 8:00 AM - 12:00 PM</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-4">Book a Consultation</h4>
+                    <p class="mb-4">Schedule a free consultation with Cuong Nguyen to discuss your cybersecurity needs.</p>
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/cnsecconsultingptyltd" style="min-width:320px;height:630px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2025 CN Security Consulting Pty Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <!-- Calendly Widget Script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Interactivity -->
+    <script>
+        $(document).ready(function() {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#B0B8C4' },
+                    shape: {
+                        type: 'circle',
+                        stroke: { width: 0, color: '#000000' },
+                        polygon: { nb_sides: 5 }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false,
+                        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#B0B8C4',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'repulse' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 400, line_linked: { opacity: 1 } },
+                        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                        repulse: { distance: 200, duration: 0.4 },
+                        push: { 
+                            particles_nb: 4,
+                            custom: function(pJS) {
+                                document.getElementById('particles-js').addEventListener('click', function(e) {
+                                    pJS.particles.array.push(
+                                        new pJS.particles.particle(
+                                            e.clientX - pJS.canvas.el.getBoundingClientRect().left,
+                                            e.clientY - pJS.canvas.el.getBoundingClientRect().top
+                                        )
+                                    );
+                                });
+                            }
+                        },
+                        remove: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+
+            // Smooth scrolling
+            $('.nav-link').click(function(e) {
+                e.preventDefault();
+                const target = $(this).attr('href');
+                if (target.startsWith('#')) {
+                    $('html, body').animate({
+                        scrollTop: $(target).offset().top - 60
+                    }, 800);
+                    $('.nav-link').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+
+            // Service card toggle
+            $('.service-card').click(function() {
+                $(this).find('.card-text').slideToggle(300);
+            });
+        });
+    </script>
+</body>
+</html>
