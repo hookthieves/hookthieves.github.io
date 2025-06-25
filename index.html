@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <!-- Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
@@ -42,7 +42,7 @@
         padding: 5rem 0;
         text-align: center;
     }
-    .service-card, .testimonial-card {
+    .service-card, .testimonial-card, .contact-card {
         background: linear-gradient(135deg, #1E2A3C 0%, #121F2B 100%);
         animation: gradient 15s ease infinite;
         background-size: 200% 200%;
@@ -93,7 +93,7 @@
         font-weight: 400;
         color: #B0B8C4;
     }
-    .service-card:hover, .testimonial-card:hover {
+    .service-card:hover, .testimonial-card:hover, .contact-card:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
         opacity: 0.95;
@@ -105,10 +105,13 @@
     .service-card strong,
     .testimonial-card .card-text,
     .testimonial-card p,
-    .testimonial-card strong {
+    .testimonial-card strong,
+    .contact-card p,
+    .contact-card strong,
+    .contact-card a {
         color: #F5F7FA !important;
     }
-    .service-card i, .testimonial-card i {
+    .service-card i, .testimonial-card i, .contact-card i {
         color: #3B82F6 !important;
     }
     .btn-primary {
@@ -165,27 +168,18 @@
         z-index: -1;
         background-color: #121F2B;
     }
-    /* Calendly Widget Styling */
-    .calendly-inline-widget {
-        width: 100%;
-        height: 650px;
-        min-width: 320px;
-        background: transparent;
-        border: none;
+    /* Contact Card Styling */
+    .contact-card ul li {
+        margin-bottom: 0.5rem;
     }
-    @media (max-width: 768px) {
-        .calendly-inline-widget {
-            height: 800px;
-        }
+    .contact-card h5 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
     }
     @media (max-width: 576px) {
-        .calendly-inline-widget {
-            height: 1000px;
+        .service-card, .testimonial-card, .contact-card {
+            padding: 1rem;
         }
-    }
-    /* Ensure Calendly widget text aligns with site theme */
-    .calendly-inline-widget * {
-        font-family: 'Inter', sans-serif !important;
     }
 </style>
 </head>
@@ -217,7 +211,7 @@
             <h1 class="display-4 fw-bold">CN Security Consulting Pty Ltd</h1>
             <p class="lead">Offensive security consulting based in Melbourne, Australia.</p>
             <p>We offer cutting-edge cybersecurity services, including Offensive Phishing Operations, WiFi Exploitation, Red Teaming Simulations, and more.</p>
-            <a href="#contact" class="btn btn-primary mt-3">Get a Free Consultation</a>
+            <a href="https://calendly.com/cnsecconsultingptyltd/" class="btn btn-primary mt-3">Get a Free Consultation</a>
         </div>
     </section>
 
@@ -324,28 +318,25 @@
     <section id="contact" class="section-padding" data-aos="fade-up" data-aos-duration="1000">
         <div class="container">
             <h2 class="text-center mb-5">Contact Us</h2>
-            <div class="row g-5">
+            <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h4 class="mb-4">Contact Details</h4>
-                    <p><strong>Address:</strong> Melbourne VIC, Australia</p>
-                    <p><strong>Phone:</strong> <a href="tel:0422662044" class="text-decoration-none text-light">0422 662 044</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:cnsecconsultingptyltd@gmail.com" class="text-decoration-none text-light">cnsecconsultingptyltd@gmail.com</a></p>
-                    <p><strong>ABN:</strong> 90 706 059 463</p>
-                    <h5 class="mt-4">Operating Hours</h5>
-                    <ul class="list-unstyled text-muted">
-                        <li>Monday: 5:00 PM - 10:00 PM</li>
-                        <li>Tuesday: 5:00 PM - 10:00 PM</li>
-                        <li>Wednesday: 5:00 PM - 10:00 PM</li>
-                        <li>Thursday: 5:00 PM - 10:00 PM</li>
-                        <li>Friday: 5:00 PM - 10:00 PM</li>
-                        <li>Saturday: 8:00 AM - 12:00 PM</li>
-                        <li>Sunday: 8:00 AM - 12:00 PM</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="mb-4">Book a Consultation</h4>
-                    <p class="mb-4">Schedule a free consultation with Cuong Nguyen to discuss your cybersecurity needs.</p>
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/cnsecconsultingptyltd" style="min-width:320px;"></div>
+                    <div class="contact-card">
+                        <h4 class="mb-4 text-center"><i class="bi bi-envelope me-2"></i>Contact Details</h4>
+                        <p><strong>Address:</strong> Melbourne VIC, Australia</p>
+                        <p><strong>Phone:</strong> <a href="tel:0422662044" class="text-decoration-none">0422 662 044</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:cnsecconsultingptyltd@gmail.com" class="text-decoration-none">cnsecconsultingptyltd@gmail.com</a></p>
+                        <p><strong>ABN:</strong> 90 706 059 463</p>
+                        <h5 class="text-center">Operating Hours</h5>
+                        <ul class="list-unstyled text-muted">
+                            <li>Monday: 5:00 PM - 10:00 PM</li>
+                            <li>Tuesday: 5:00 PM - 10:00 PM</li>
+                            <li>Wednesday: 5:00 PM - 10:00 PM</li>
+                            <li>Thursday: 5:00 PM - 10:00 PM</li>
+                            <li>Friday: 5:00 PM - 10:00 PM</li>
+                            <li>Saturday: 8:00 AM - 12:00 PM</li>
+                            <li>Sunday: 8:00 AM - 12:00 PM</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,8 +356,6 @@
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
-    <!-- Calendly Widget Script -->
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- Interactivity -->
