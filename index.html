@@ -156,23 +156,51 @@
         position: relative;
         z-index: 10;
     }
-    .calendly-inline-widget {
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #121F2B;
+    }
+    /* Calendly Widget Styling */
+    .calendly-container {
         background: #1E2A3C;
         border: 1px solid #B0B8C4;
         border-radius: 8px;
-        padding: 1rem;
+        padding: 1.5rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .calendly-inline-widget {
+        width: 100%;
+        height: 650px; /* Adjusted for better fit */
         min-width: 320px;
-        height: 640px;
-        overflow-y: auto;
+    }
+    @media (max-width: 768px) {
+        .calendly-inline-widget {
+            height: 800px; /* Slightly taller for tablets */
+        }
+        .calendly-container {
+            padding: 1rem;
+        }
     }
     @media (max-width: 576px) {
+        .calendly-inline-widget {
+            height: 1000px; /* Taller for mobile to avoid cutoff */
+        }
+        .calendly-container {
+            padding: 0.5rem;
+        }
         .service-card, .testimonial-card {
             padding: 1rem;
         }
-        .calendly-inline-widget {
-            padding: 0.5rem;
-            height: 1000px;
-        }
+    }
+    /* Ensure Calendly widget text aligns with site theme */
+    .calendly-inline-widget * {
+        font-family: 'Inter', sans-serif !important;
     }
 </style>
 </head>
@@ -196,6 +224,8 @@
                 </ul>
             </div>
         </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero" data-aos="fade-in" data-aos-duration="1000">
         <div class="container">
@@ -276,7 +306,7 @@
                     <div class="card service-card h-100">
                         <div class="card-body text-center">
                             <i class="bi bi-wifi mb-3" style="font-size: 2rem;"></i>
-                            <h3 class="card-title h5"><strong>WiFi Exploitation</strong></h3>
+                            <h3 class="h5"><strong>WiFi Exploitation</strong></h3>
                             <p class="card-text">The WiFi exploitation service assesses your organisation’s wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior. This service helps you strengthen defenses against real-world wireless threats.</p>
                             <p><strong>Options:</strong> One-time breach assessment</p>
                             <a href="#contact" class="btn btn-outline-primary">Get Started</a>
@@ -330,7 +360,9 @@
                 <div class="col-md-6">
                     <h4 class="mb-4">Book a Consultation</h4>
                     <p class="mb-4">Schedule a free consultation with Cuong Nguyen to discuss your cybersecurity needs.</p>
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/cnsecconsultingptyltd" style="min-width:320px;height:630px;"></div>
+                    <div class="calendly-container">
+                        <div class="calendly-inline-widget" data-url="https://calendly.com/cnsecconsultingptyltd" style="min-width:320px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
