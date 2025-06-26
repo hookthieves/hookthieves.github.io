@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CN Security Consulting - Offensive security services in Melbourne, Australia">
+    <title>CN Security Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        .terminal {
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: #000;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #00ff00;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff0000;
+        }
+
+        .btn:nth-child(2) { background: #ffff00; }
+        .btn:nth-child(3) { background: #00ff00; }
+
+        .terminal-title {
+            font-size: 0.9rem;
+            color: #00ff00;
+        }
+
+        .prompt {
+            color: #00ff00;
+            margin-right: 0.5rem;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+            background: #00ff00;
+            width: 8px;
+            height: 16px;
+            display: inline-block;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .command-line {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .output {
+            margin: 0.5rem 0 1rem 0;
+            padding-left: 1rem;
+            color: #ffffff;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #333;
+        }
+
+        .ascii-art {
+            font-size: 0.7rem;
+            color: #00ff00;
+            white-space: pre;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .service-item {
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+        }
+
+        .service-name {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .service-desc {
+            color: #cccccc;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .contact-label {
+            color: #00ff00;
+            min-width: 100px;
+        }
+
+        .contact-value {
+            color: #ffffff;
+        }
+
+        .contact-value a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #00ff00;
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+
+        .warning {
+            color: #ffff00;
+        }
+
+        .success {
+            color: #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            .terminal {
+                margin: 0.5rem;
+                padding: 0.5rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.5rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="btn"></div>
+                <div class="btn"></div>
+                <div class="btn"></div>
+            </div>
+            <div class="terminal-title">cn-security-console v2.1.0</div>
+        </div>
+
+        <div class="command-line">
+            <span class="prompt">root@cnsecurity:~$</span>
+            <span>./company_info.sh</span>
+        </div>
+
+        <div class="output">
+            <div class="ascii-art">
+   _____ _   _   _____                      _ _         
+  / ____| \ | | / ____|                    (_) |        
+ | |    |  \| || (___   ___  ___ _   _ _ __ _| |_ _   _ 
+ | |    | . ` | \___ \ / _ \/ __| | | | '__| | __| | | |
+ | |____| |\  | ____) |  __/ (__| |_| | |  | | |_| |_| |
+  \_____|_| \_||_____/ \___|\___|\__,_|_|  |_|\__|\__, |
+                                                   __/ |
+                                                  |___/ 
+            </div>
+            <div class="success">[INFO] Initializing offensive security framework...</div>
+            <div class="success">[INFO] Loading consultant profile...</div>
+            <div class="success">[INFO] System ready for security assessment</div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>whoami</span>
+            </div>
+            <div class="output">
+                <div><strong>Cuong Nguyen</strong> - Principal Security Consultant</div>
+                <div>Certifications: OSWP | OSCP | OSWA | OSWE</div>
+                <div>Experience: 10+ years in offensive cybersecurity</div>
+                <div>Location: Melbourne, Australia</div>
+                <div>Status: <span class="success">ACTIVE</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>ls -la /services/</span>
+            </div>
+            <div class="output">
+                <div>total 5</div>
+                <div class="service-item">
+                    <div class="service-name">drwxr-xr-x penetration_testing/</div>
+                    <div class="service-desc">└── Real-world cyberattack simulation</div>
+                    <div class="service-desc">└── Options: 3-day breach | continuous retainer</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-name">drwxr-xr-x red_teaming/</div>
+                    <div class="service-desc">└── Advanced coordinated attack simulation</div>
+                    <div class="service-desc">└── Options: standalone | persistent exercises</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-name">drwxr-xr-x phishing_operations/</div>
+                    <div class="service-desc">└── Sophisticated social engineering campaigns</div>
+                    <div class="service-desc">└── Options: single strike | ongoing drills</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-name">drwxr-xr-x wifi_exploitation/</div>
+                    <div class="service-desc">└── Wireless network security assessment</div>
+                    <div class="service-desc">└── Options: one-time breach assessment</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-name">drwxr-xr-x malware_development/</div>
+                    <div class="service-desc">└── Custom evasion testing payloads</div>
+                    <div class="service-desc">└── Options: single payload | recurring simulations</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>cat /testimonials/abound_communities.txt</span>
+            </div>
+            <div class="output">
+                <div class="success">[CLIENT TESTIMONIAL]</div>
+                <div>"Abound Communities was delighted to have Cuong from CN Security</div>
+                <div>Consulting review our information security requirements. His</div>
+                <div>professionalism and attention to detail was exceptional.</div>
+                <div>We would gladly recommend CN Security Consulting."</div>
+                <div class="warning">-- Kathryn Lewis, Executive Assistant to CEO</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>cat /etc/contact.conf</span>
+            </div>
+            <div class="output">
+                <div class="contact-info">
+                    <div class="contact-label">PHONE:</div>
+                    <div class="contact-value"><a href="tel:0422662044">0422 662 044</a></div>
+                    
+                    <div class="contact-label">EMAIL:</div>
+                    <div class="contact-value"><a href="mailto:cnsecconsultingptyltd@gmail.com">cnsecconsultingptyltd@gmail.com</a></div>
+                    
+                    <div class="contact-label">ABN:</div>
+                    <div class="contact-value">90 706 059 463</div>
+                    
+                    <div class="contact-label">LOCATION:</div>
+                    <div class="contact-value">Melbourne, Victoria, Australia</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>crontab -l</span>
+            </div>
+            <div class="output">
+                <div># Operating Hours Schedule</div>
+                <div>0 17 * * 1-5 /usr/bin/enable_consulting_mode  # Mon-Fri 5PM</div>
+                <div>0 22 * * 1-5 /usr/bin/disable_consulting_mode # Mon-Fri 10PM</div>
+                <div>0 8 * * 6-7 /usr/bin/enable_consulting_mode   # Sat-Sun 8AM</div>
+                <div>0 12 * * 6-7 /usr/bin/disable_consulting_mode # Sat-Sun 12PM</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="command-line">
+                <span class="prompt">root@cnsecurity:~$</span>
+                <span>curl -X GET https://calendly.com/cnsecconsultingptyltd/</span>
+            </div>
+            <div class="output">
+                <div class="success">[BOOKING SYSTEM ACTIVE]</div>
+                <div>Free consultation available at:</div>
+                <div><a href="https://calendly.com/cnsecconsultingptyltd/" style="color: #00ff00;">https://calendly.com/cnsecconsultingptyltd/</a></div>
+            </div>
+        </div>
+
+        <div class="command-line">
+            <span class="prompt">root@cnsecurity:~$</span>
+            <span class="cursor"></span>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <span>CN Security Consulting Pty Ltd © 2025</span>
+        <span>Status: ONLINE | Load: 0.42 | Uptime: 10+ years</span>
+    </div>
+
+    <script>
+        // Add some terminal-like interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate typing effect on page load
+            const commands = document.querySelectorAll('.command-line span:last-child');
+            commands.forEach((cmd, index) => {
+                const text = cmd.textContent;
+                cmd.textContent = '';
+                setTimeout(() => {
+                    let i = 0;
+                    const typeInterval = setInterval(() => {
+                        cmd.textContent += text[i];
+                        i++;
+                        if (i >= text.length) {
+                            clearInterval(typeInterval);
+                        }
+                    }, 50);
+                }, index * 1000);
+            });
+
+            // Add some random system messages
+            const statusMessages = [
+                'Firewall: ACTIVE',
+                'Intrusion Detection: MONITORING',
+                'Threat Level: GREEN',
+                'Services: OPERATIONAL'
+            ];
+
+            let messageIndex = 0;
+            setInterval(() => {
+                const statusBar = document.querySelector('.status-bar span:last-child');
+                statusBar.textContent = `Status: ONLINE | ${statusMessages[messageIndex]} | Uptime: 10+ years`;
+                messageIndex = (messageIndex + 1) % statusMessages.length;
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
