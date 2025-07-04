@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CN Security Consulting Pty Ltd offers offensive security services like phishing, red teaming, and WiFi exploitation in Melbourne, Australia.">
+    <meta name="keywords" content="cybersecurity, offensive security, penetration testing, red teaming, Melbourne">
+    <meta name="author" content="Cuong Nguyen">
+    <title>CN Security Consulting Pty Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #dc2626;
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2d2d2d;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6b7280;
+            --text-dark: #111827;
+            --white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo::after {
+            content: '.';
+            color: var(--primary-dark);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .header-cta {
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-red);
+        }
+
+        .header-cta:hover {
+            background: var(--white);
+            color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero .highlight {
+            font-weight: 800;
+            color: var(--primary-red);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-red);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--primary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-white {
+            background: var(--white);
+        }
+
+        .section-gray {
+            background: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .consultant-card {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            padding: 2.5rem;
+            text-align: center;
+            position: sticky;
+            top: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .consultant-card:hover {
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .consultant-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .consultant-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .consultant-title {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .certifications {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-badge {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-red);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 40px var(--shadow-hover);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary-dark);
+            transform: rotate(360deg);
+        }
+
+        .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .service-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            padding: 3rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-info {
+            list-style: none;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .contact-info a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            main {
+                margin-top: 140px;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .consultant-card {
+                position: static;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">CN SECURITY CONSULTING PTY LTD</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://calendly.com/cnsecconsultingptyltd/" class="header-cta">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>ELITE <span class="highlight">SECURITY</span><br>CONSULTING</h1>
+                <p class="subtitle">Professional offensive security services in Melbourne. Strengthen your defenses through expert penetration testing, red team operations, and comprehensive security assessments.</p>
+                <a href="https://calendly.com/cnsecconsultingptyltd/" class="hero-cta">Schedule Consultation</a>
+            </div>
+        </section>
+
+        <section class="section section-white" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">About</h2>
+                    <p class="section-subtitle">Expert cybersecurity consultant with over a decade of offensive security experience</p>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="consultant-card">
+                        <div class="consultant-avatar">CN</div>
+                        <div class="consultant-name">CUONG NGUYEN</div>
+                        <div class="consultant-title">Principal Security Consultant</div>
+                        <div class="certifications">
+                            <div class="cert-badge">OSWP</div>
+                            <div class="cert-badge">OSCP</div>
+                            <div class="cert-badge">OSWA</div>
+                            <div class="cert-badge">OSWE</div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--medium-gray); margin-top: 1rem;">
+                            <strong>Location:</strong> Melbourne, Australia<br>
+                            <strong>ABN:</strong> 90 706 059 463
+                        </div>
+                    </div>
+                    
+                    <div class="about-text">
+  <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
+            <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+            <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>        
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-gray" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Services</h2>
+                    <p class="section-subtitle">Comprehensive offensive security solutions to test, strengthen, and protect your organization</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🔍</div>
+                        <h3 class="service-title">Penetration Testing</h3>
+                        <p class="service-description">Comprehensive security assessments that simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications before malicious actors can exploit them.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🦠</div>
+                        <h3 class="service-title">Malware Development</h3>
+                        <p class="service-description">Custom malware creation designed to test your security systems by identifying gaps in detection and mitigation capabilities through advanced evasion techniques.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3 class="service-title">Red Team Simulation</h3>
+                        <p class="service-description">Advanced attack simulations that replicate the techniques, tactics, and procedures of sophisticated cybercriminals and state-sponsored threat actors.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎣</div>
+                        <h3 class="service-title">Phishing Operations</h3>
+                        <p class="service-description">Sophisticated social engineering campaigns that evaluate your organization's resilience against targeted attacks, testing both technological defenses and human awareness.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">📡</div>
+                        <h3 class="service-title">WiFi Exploitation</h3>
+                        <p class="service-description">Advanced wireless security assessments including rogue access point deployment, traffic interception, and credential harvesting to expose wireless infrastructure vulnerabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-white" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Testimonials</h2>
+                    <p class="section-subtitle">What our clients say about our security consulting services</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Abound Communities was delighted to have Cuong from CN Security Consulting review our Information security requirements. His professionalism and attention to detail was exceptional. We would gladly recommend CN Security Consulting for your technology security needs."</p>
+                    <div class="testimonial-author">Kathryn Lewis, Executive Assistant to CEO, Abound Communities</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-gray" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-subtitle">Ready to strengthen your security posture? Get in touch for a free consultation</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Contact Details</h3>
+                        <ul class="contact-info">
+                            <li>📍 Melbourne VIC, Australia</li>
+                            <li>📞 <a href="tel:0422662044">0422 662 044</a></li>
+                            <li>✉️ <a href="mailto:cnsecconsultingptyltd@gmail.com">cnsecconsultingptyltd@gmail.com</a></li>
+                            <li>🏢 ABN: 90 706 059 463</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3>Operating Hours</h3>
+                        <ul class="contact-info">
+                            <li>Monday - Friday: 17:00 - 22:00</li>
+                            <li>Saturday - Sunday: 08:00 - 12:00</li>
+                            <li>Consultations by appointment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 CN Security Consulting Pty Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.service-card, .testimonial-card, .contact-card, .consultant-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
