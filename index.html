@@ -51,16 +51,16 @@
         .header-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 70px;
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.75rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--primary-red);
             text-decoration: none;
@@ -72,14 +72,25 @@
             color: var(--primary-dark);
         }
 
-        nav ul {
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-dark);
+            padding: 0.5rem;
+        }
+
+        .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
         }
 
-        nav a {
+        .nav-menu a {
             color: var(--text-dark);
             text-decoration: none;
             font-weight: 500;
@@ -89,7 +100,7 @@
             letter-spacing: 0.5px;
         }
 
-        nav a:hover {
+        .nav-menu a:hover {
             color: var(--primary-red);
         }
 
@@ -97,7 +108,7 @@
             background: var(--primary-red);
             color: var(--white);
             padding: 0.75rem 1.5rem;
-            border-radius: 0;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
             text-transform: uppercase;
@@ -115,14 +126,14 @@
 
         /* Main Content */
         main {
-            margin-top: 80px;
+            margin-top: 70px;
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
             color: var(--white);
-            padding: 6rem 0;
+            padding: 4rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -142,16 +153,16 @@
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             position: relative;
             z-index: 1;
         }
 
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(2rem, 8vw, 4.5rem);
             font-weight: 300;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.2;
             letter-spacing: -1px;
         }
@@ -162,8 +173,8 @@
         }
 
         .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            margin-bottom: 2rem;
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
@@ -175,14 +186,15 @@
             display: inline-block;
             background: var(--primary-red);
             color: var(--white);
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             border: 2px solid var(--primary-red);
+            border-radius: 5px;
         }
 
         .hero-cta:hover {
@@ -194,7 +206,7 @@
 
         /* Section Styling */
         .section {
-            padding: 5rem 0;
+            padding: 3rem 0;
         }
 
         .section-white {
@@ -208,17 +220,17 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .section-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 1rem;
@@ -227,7 +239,7 @@
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: var(--medium-gray);
             max-width: 600px;
             margin: 0 auto;
@@ -237,19 +249,18 @@
         /* About Section */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
             align-items: start;
         }
 
         .consultant-card {
             background: var(--white);
             border: 2px solid var(--border-light);
-            padding: 2.5rem;
+            padding: 2rem;
             text-align: center;
-            position: sticky;
-            top: 100px;
             transition: all 0.3s ease;
+            border-radius: 10px;
         }
 
         .consultant-card:hover {
@@ -259,22 +270,22 @@
         }
 
         .consultant-avatar {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: var(--primary-red);
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--white);
             font-weight: 700;
         }
 
         .consultant-name {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 0.5rem;
@@ -282,7 +293,7 @@
 
         .consultant-title {
             color: var(--medium-gray);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 500;
         }
 
@@ -290,7 +301,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .cert-badge {
@@ -301,6 +312,7 @@
             font-weight: 600;
             text-align: center;
             letter-spacing: 1px;
+            border-radius: 3px;
         }
 
         .about-text {
@@ -316,18 +328,19 @@
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .service-card {
             background: var(--white);
             border: 2px solid var(--border-light);
-            padding: 2.5rem;
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border-radius: 10px;
         }
 
         .service-card::before {
@@ -349,20 +362,20 @@
         .service-card:hover {
             border-color: var(--primary-red);
             box-shadow: 0 15px 40px var(--shadow-hover);
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: var(--primary-red);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            margin: 0 auto 1rem;
             transition: all 0.3s ease;
         }
 
@@ -373,7 +386,7 @@
 
         .service-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 1rem;
@@ -384,23 +397,25 @@
         .service-description {
             color: var(--medium-gray);
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* Testimonials */
         .testimonial-card {
             background: var(--white);
             border: 2px solid var(--border-light);
-            padding: 3rem;
+            padding: 2rem;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            border-radius: 10px;
         }
 
         .testimonial-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-dark);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-style: italic;
         }
 
@@ -410,35 +425,37 @@
             color: var(--primary-red);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
 
         /* Contact Section */
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
         }
 
         .contact-card {
             background: var(--white);
             border: 2px solid var(--border-light);
-            padding: 2.5rem;
+            padding: 2rem;
             text-align: center;
+            border-radius: 10px;
         }
 
         .contact-card h3 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: -0.5px;
         }
 
         .contact-info {
             list-style: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 2;
         }
 
@@ -463,49 +480,142 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .header-container {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
                 flex-direction: column;
-                height: auto;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 2px 10px var(--shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
                 padding: 1rem;
+                display: block;
+                width: 100%;
+                text-align: center;
             }
 
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
+            .header-cta {
                 margin-top: 1rem;
+                padding: 1rem 2rem;
             }
 
-            main {
-                margin-top: 140px;
+            .logo {
+                font-size: 1rem;
             }
 
             .hero {
                 padding: 3rem 0;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .section {
+                padding: 2rem 0;
             }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .section-header {
+                margin-bottom: 2rem;
             }
 
             .consultant-card {
-                position: static;
+                padding: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr 1.5fr;
+                gap: 3rem;
             }
 
             .services-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .contact-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Desktop Responsive */
+        @media (min-width: 1025px) {
+            .header-container {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding: 0 2rem;
+            }
+
+            .hero-content {
+                padding: 0 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr 2fr;
+                gap: 4rem;
+            }
+
+            .consultant-card {
+                position: sticky;
+                top: 100px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
             }
 
             .section {
-                padding: 3rem 0;
+                padding: 5rem 0;
+            }
+
+            .section-header {
+                margin-bottom: 4rem;
+            }
+
+            .hero {
+                padding: 6rem 0;
             }
         }
 
@@ -536,7 +646,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--primary-red);
-            border-radius: 0;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -547,9 +657,12 @@
 <body>
     <header>
         <div class="header-container">
-            <a href="#" class="logo">CN SECURITY CONSULTING PTY LTD</a>
+            <a href="#" class="logo">CN SECURITY CONSULTING</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span>☰</span>
+            </button>
             <nav>
-                <ul>
+                <ul class="nav-menu">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
@@ -563,7 +676,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1><span class="highlight">OFFENSIVE SECURITY</span><br>CONSULTING</h1>
+                <h1>ELITE <span class="highlight">SECURITY</span><br>CONSULTING</h1>
                 <p class="subtitle">Professional offensive security services in Melbourne. Strengthen your defenses through expert penetration testing, red team operations, and comprehensive security assessments.</p>
                 <a href="https://calendly.com/cnsecconsultingptyltd/" class="hero-cta">Schedule Consultation</a>
             </div>
@@ -594,13 +707,9 @@
                     </div>
                     
                     <div class="about-text">
-  <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
-            <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
-            <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>        
-
-
-
-
+                        <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>
+                        <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+                        <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>
                     </div>
                 </div>
             </div>
@@ -697,13 +806,32 @@
     </footer>
 
     <script>
+        // Mobile navigation toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = navToggle.querySelector('span');
+            icon.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = navToggle.querySelector('span');
+                icon.textContent = '☰';
+            });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 100;
+                    const headerOffset = 90;
                     const elementPosition = target.offsetTop;
                     const offsetPosition = elementPosition - headerOffset;
                     
@@ -716,11 +844,9 @@
         });
 
         // Header scroll effect
-        let lastScrollY = window.scrollY;
         const header = document.querySelector('header');
-
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {
                 header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
             } else {
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
@@ -730,7 +856,7 @@
         // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
