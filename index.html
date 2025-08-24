@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CN Security Consulting Pty Ltd offers offensive security services like phishing, red teaming, and WiFi exploitation in Melbourne, Australia.">
+    <meta name="keywords" content="cybersecurity, offensive security, penetration testing, red teaming, Melbourne">
+    <meta name="author" content="Cuong Nguyen">
+    <title>CN Security Consulting Pty Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #00ff00;
+            background-color: #000000;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-image: 
+                linear-gradient(90deg, rgba(0,255,0,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0,255,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Terminal window styling */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, #333, #222);
+            border-bottom: 1px solid #444;
+            z-index: 1000;
+        }
+
+        /* Terminal buttons */
+        body::after {
+            content: '● ● ●';
+            position: fixed;
+            top: 8px;
+            left: 15px;
+            font-size: 12px;
+            color: #ff5f56;
+            z-index: 1001;
+            letter-spacing: 5px;
+        }
+
+        /* Terminal prompt styling */
+        .terminal-line::before {
+            content: 'user@security:~$ ';
+            color: #00ff00;
+            font-weight: 600;
+        }
+
+        .terminal-comment {
+            color: #666;
+        }
+
+        .terminal-comment::before {
+            content: '# ';
+        }
+
+        /* Header */
+        header {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 15px;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #00ff00;
+        }
+
+        .logo::before {
+            content: 'root@cn-security:/home/consulting# ';
+            color: #ff6b6b;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav li::before {
+            content: '[';
+            color: #00ff00;
+        }
+
+        nav li::after {
+            content: ']';
+            color: #00ff00;
+        }
+
+        nav a {
+            color: #87ceeb;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #00ff00;
+            background-color: #001100;
+        }
+
+        /* Terminal sections */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #00ff00;
+        }
+
+        h1::before {
+            content: '#!/bin/bash\A# ';
+            white-space: pre;
+            color: #666;
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #ffff00;
+            margin-top: 40px;
+        }
+
+        h2::before {
+            content: '==> ';
+            color: #00ff00;
+        }
+
+        h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #87ceeb;
+        }
+
+        h3::before {
+            content: '---> ';
+            color: #00ff00;
+        }
+
+        p {
+            margin-bottom: 15px;
+            max-width: 80ch;
+            color: #cccccc;
+        }
+
+        /* Code-like styling for credentials */
+        .credentials {
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .credentials::before {
+            content: 'cuong@security:~$ cat ~/.certifications\A';
+            color: #00ff00;
+            white-space: pre;
+            display: block;
+        }
+
+        .credentials-list {
+            color: #87ceeb;
+            margin-left: 0;
+        }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .service {
+            border: 1px solid #333;
+            padding: 15px;
+            background: #111;
+            position: relative;
+        }
+
+        .service::before {
+            content: '┌─ SERVICE MODULE ─┐';
+            position: absolute;
+            top: -8px;
+            left: 5px;
+            background: #000;
+            color: #00ff00;
+            font-size: 10px;
+            padding: 0 5px;
+        }
+
+        .service h3 {
+            margin-bottom: 10px;
+            color: #ffff00;
+        }
+
+        .service h3::before {
+            content: '$ ./';
+            color: #00ff00;
+        }
+
+        .service p {
+            font-size: 13px;
+            margin-bottom: 10px;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        /* Contact info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .contact-section {
+            border: 1px solid #333;
+            padding: 15px;
+            background: #111;
+        }
+
+        .contact-section h3 {
+            margin-bottom: 10px;
+            color: #ffff00;
+        }
+
+        .contact-section ul {
+            list-style: none;
+        }
+
+        .contact-section li {
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        .contact-section li::before {
+            content: '│ ';
+            color: #00ff00;
+        }
+
+        /* Links */
+        a {
+            color: #87ceeb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #00ff00;
+            background-color: #001100;
+            text-decoration: underline;
+        }
+
+        /* Button */
+        .cta-button {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #00ff00;
+            background: #001100;
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 13px;
+            margin-top: 20px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .cta-button::before {
+            content: '[EXEC] ';
+            color: #ffff00;
+        }
+
+        .cta-button:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: #111;
+            border-left: 3px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .testimonial::before {
+            content: '┌── TESTIMONIAL OUTPUT ──┐\A';
+            white-space: pre;
+            color: #00ff00;
+            font-size: 11px;
+        }
+
+        .testimonial p {
+            color: #ddd;
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        .testimonial-author {
+            color: #87ceeb;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .testimonial-author::before {
+            content: '└── ';
+            color: #00ff00;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #00ff00;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+        }
+
+        footer::before {
+            content: '# End of script execution\A';
+            white-space: pre;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* VIM-style cursor */
+        .cursor::after {
+            content: '█';
+            animation: blink 1s infinite;
+            color: #00ff00;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Company details terminal box */
+        .company-info {
+            background: #111;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .company-info::before {
+            content: 'cuong@security:~$ cat /etc/company.conf\A';
+            color: #00ff00;
+            white-space: pre;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .company-info div {
+            color: #87ceeb;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 35px 15px 20px 15px;
+                font-size: 13px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Terminal window frame */
+        @media (min-width: 1000px) {
+            body {
+                border-left: 2px solid #333;
+                border-right: 2px solid #333;
+                border-bottom: 2px solid #333;
+            }
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: #00ff00;
+            color: #000;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">CN Security Consulting Pty Ltd</div>
+        <nav>
+            <ul>
+                <li><a href="#about">about</a></li>
+                <li><a href="#services">services</a></li>
+                <li><a href="#testimonials">testimonials</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Offensive Security Consulting<span class="cursor"></span></h1>
+            <p>Melbourne-based cybersecurity services. Penetration testing, red teaming, and security assessments for organizations seeking to strengthen their defenses against sophisticated threats.</p>
+            
+            <div class="company-info">
+                <div>Location: Melbourne VIC, Australia</div>
+                <div>ABN: 90 706 059 463</div>
+                <div>Hours: Mon-Fri 17:00-22:00, Sat-Sun 08:00-12:00</div>
+                <div>Status: ONLINE</div>
+            </div>
+            
+            <a href="https://calendly.com/cnsecconsultingptyltd/" class="cta-button">Schedule Consultation</a>
+        </section>
+
+        <section id="about">
+            <h2>About</h2>
+            <h3>Cuong Nguyen, Principal Security Consultant</h3>
+            
+            <div class="credentials">
+                <div class="credentials-list">OSWP | OSCP | OSWA | OSWE Certified</div>
+            </div>
+            
+            <p>I'm Cuong Nguyen, a cybersecurity expert with over a decade of experience in offensive operations. As a red team operator at an investment management firm, I emulate threat actors' TTPs to identify security gaps in people, procedures, and infrastructure. I collaborate with security teams to enhance defenses through mitigations and purple teaming, providing second-line oversight to support cybersecurity and fraud prevention efforts.</p>	
+            
+            <p>I run CN Security Consulting Pty Ltd as a side business to deliver expert offensive security services to safeguard organisations from hackers. Whether you need a custom phishing kit to test the security awareness of your organisation or you need a red team engagement emulating nation state threat actors; I will be on your team to provide tailored solutions to fortify your security posture.</p>
+            
+            <p>I take immense pride in delivering high-quality work, all performed locally in Melbourne, Australia, without third-party involvement. Trust me to provide top-tier service directly to you, ensuring your organisations defenses are robust and reliable. I will work closely with your security teams to help build detections against advanced techniques to better strengthen your tools. I am commited to help and protect your organisation against the hackers so that you can sleep well at night. So what do you say? Get in touch with me for a free consultation so I can help you protect your organisation through offensive security.</p>        
+        </section>
+
+        <section id="services">
+            <h2>Services</h2>
+            <p>Tailored offensive security solutions designed to test systems, uncover vulnerabilities, and prepare organizations against sophisticated threats.</p>
+            
+            <div class="services-grid">
+                <div class="service">
+                    <h3>pentest.sh</h3>
+                    <p>Penetration testing is a proactive service where we simulate real-world cyberattacks to identify vulnerabilities in your infrastructure, systems, and applications. We assess the security of your systems before attackers can exploit them.</p>
+                </div>
+
+                <div class="service">
+                    <h3>malware_dev.py</h3>
+                    <p>The malware development service tests the effectiveness of your security systems by creating custom malware designed to evade detection. This helps strengthen your defenses by identifying gaps in your detection and mitigation capabilities.</p>
+                </div>
+
+                <div class="service">
+                    <h3>redteam.rb</h3>
+                    <p>Red teaming simulates advanced, coordinated cyberattacks to assess your organisation's defense capabilities in high-stress, real-world scenarios. I replicate the techniques, tactics and procedures used by sophisticated cybercriminals and state-sponsored hackers.</p>
+                </div>
+
+                <div class="service">
+                    <h3>phishing.js</h3>
+                    <p>The offensive phishing operations service evaluates your organisation's resilience against targeted social engineering attacks by crafting and deploying sophisticated phishing campaigns. These custom-built operations mimic real-world tactics used by attackers to trick employees, bypass defenses, and infiltrate systems, helping you identify vulnerabilities in both technology and human awareness.</p>
+                </div>
+
+                <div class="service">
+                    <h3>wifi_exploit.c</h3>
+                    <p>The WiFi exploitation service assesses your organisation's wireless network security by simulating advanced attacker techniques. Using cutting-edge tools and methodologies, I conduct targeted attacks—such as rogue access point deployment, traffic interception, and credential harvesting—to expose vulnerabilities in your WiFi infrastructure, encryption, and user behavior.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <h2>Testimonials</h2>
+            <div class="testimonial">
+                <p>"Abound Communities was delighted to have Cuong from CN Security Consulting review our Information security requirements. His professionalism and attention to detail was exceptional. We would gladly recommend CN Security Consulting for your technology security needs."</p>
+                <div class="testimonial-author">Kathryn Lewis, Executive Assistant to CEO, Abound Communities</div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <div class="contact-section">
+                    <h3>connection.cfg</h3>
+                    <ul>
+                        <li>Melbourne VIC, Australia</li>
+                        <li><a href="tel:0422662044">0422 662 044</a></li>
+                        <li><a href="mailto:cnsecconsultingptyltd@gmail.com">cnsecconsultingptyltd@gmail.com</a></li>
+                        <li>ABN: 90 706 059 463</li>
+                    </ul>
+                </div>
+                <div class="contact-section">
+                    <h3>uptime.log</h3>
+                    <ul>
+                        <li>Mon-Fri: 17:00-22:00</li>
+                        <li>Sat-Sun: 08:00-12:00</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 CN Security Consulting Pty Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Terminal cursor effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.cursor');
+            if (cursor) {
+                setTimeout(() => {
+                    cursor.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Terminal typing effect for hero
+        document.addEventListener('DOMContentLoaded', function() {
+            const hero = document.querySelector('.hero h1');
+            const text = hero.textContent;
+            hero.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    hero.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                } else {
+                    hero.innerHTML += '<span class="cursor"></span>';
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        });
+
+        // Matrix-style background effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const createMatrixRain = () => {
+                const chars = '01';
+                const columns = Math.floor(window.innerWidth / 20);
+                
+                for(let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const span = document.createElement('span');
+                        span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                        span.style.position = 'fixed';
+                        span.style.left = Math.random() * window.innerWidth + 'px';
+                        span.style.top = '0px';
+                        span.style.color = '#003300';
+                        span.style.fontSize = '10px';
+                        span.style.pointerEvents = 'none';
+                        span.style.zIndex = '-1';
+                        document.body.appendChild(span);
+                        
+                        const fall = () => {
+                            span.style.top = parseInt(span.style.top) + 2 + 'px';
+                            if(parseInt(span.style.top) > window.innerHeight) {
+                                span.remove();
+                            } else {
+                                requestAnimationFrame(fall);
+                            }
+                        };
+                        fall();
+                    }, Math.random() * 1000);
+                }
+            };
+            
+            setInterval(createMatrixRain, 2000);
+        });
+    </script>
+</body>
+</html>
