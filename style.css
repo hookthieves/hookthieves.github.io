@@ -1,3 +1,4 @@
+```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
@@ -5,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  font-size: 1.125rem; /* Base font size for About, Testimonials, Contact */
+  font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
@@ -77,6 +78,19 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 120px 0;
+  min-height: 80vh;
+}
+
+.hero-button-wrapper {
+  margin-top: 2rem;
+}
+
 /* Buttons */
 .btn-primary {
   background: linear-gradient(to right, #ec4899, #db2777);
@@ -135,7 +149,7 @@ body {
 }
 
 .card ul li::before {
-  content: '✔';
+  content: 'Checkmark';
   position: absolute;
   left: 0;
   color: #16a34a;
@@ -187,13 +201,26 @@ body {
   background-color: #f3f4f6;
 }
 
+.testimonials-section h2,
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.testimonials-section .container {
+  text-align: center;
+}
+
 .testimonial-card {
   background-color: #fff;
   padding: 32px;
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  font-size: 1.125rem; /* same as About */
+  font-size: 1.125rem;
   line-height: 1.75rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .testimonial-card .author {
@@ -233,7 +260,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.125rem; /* same as About */
+  font-size: 1.125rem;
   line-height: 1.75rem;
   font-weight: 500;
 }
