@@ -70,24 +70,25 @@ body {
 }
 
 /* Hero */
-.hero {
-  background-color: #000;
-  color: #fff;
-  padding-top: 120px;
-  padding-bottom: 96px;
-  text-align: center;
-}
-
 .hero h1 {
-  font-size: 3.25rem;
+  font-size: clamp(2rem, 5vw, 3.25rem); /* responsive font size */
   margin-bottom: 24px;
+  line-height: 1.2; /* prevent overlapping */
 }
 
 .hero p {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   margin-bottom: 32px;
   color: #d1d5db;
+  line-height: 1.6;
 }
+
+.hero {
+  padding-top: 120px;
+  padding-bottom: 120px;
+  text-align: center;
+}
+
 
 /* Buttons */
 .btn-primary {
