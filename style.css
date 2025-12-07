@@ -84,6 +84,17 @@ body {
   margin-top: 2rem;
 }
 
+/* HERO – now thinner and cleaner */
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  text-align: center;
+  padding: 100px 20px 80px;   /* reduced from 140px → 100px top, 80px bottom */
+  min-height: auto;           /* removed the huge 90vh */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* Buttons */
 .btn-primary {
   background: linear-gradient(to right, #ec4899, #db2777);
