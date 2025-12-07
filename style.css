@@ -71,6 +71,12 @@ body {
 
 /* Hero */
 /* Centre hero button */
+.hero {
+  background-color: #000; /* Black hero banner */
+  color: #fff; /* White text */
+  padding: 120px 0;
+}
+
 .hero-content {
   display: flex;
   flex-direction: column;
