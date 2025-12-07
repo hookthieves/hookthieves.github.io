@@ -90,6 +90,11 @@ body {
   margin-top: 2rem;
 }
 
+.hero h1 {
+  font-size: 3.5rem;
+}
+
+
 /* Buttons */
 .btn-primary {
   background: linear-gradient(to right, #ec4899, #db2777);
