@@ -122,3 +122,153 @@ footer::after {
     background: var(--accent);
     color: var(--bg);
 }
+
+/* === top nav === */
+
+.tagline + .topnav {
+    margin-top: -2em;
+}
+
+.topnav {
+    margin: 0 0 2.5em 0;
+    font-size: 0.95em;
+}
+
+.topnav a {
+    color: var(--prompt);
+}
+
+.topnav .sep {
+    color: var(--dim);
+    margin: 0 0.6em;
+}
+
+/* === research notes / blog === */
+
+h3 {
+    font-size: 1em;
+    font-weight: normal;
+    color: var(--accent);
+    margin: 1.5em 0 0.5em 0;
+}
+
+h3::before {
+    content: "## ";
+    color: var(--dim);
+}
+
+.meta {
+    color: var(--dim);
+    margin: 0 0 2em 0;
+    font-size: 0.9em;
+}
+
+.breadcrumb {
+    color: var(--dim);
+    margin: 0 0 2em 0;
+    font-size: 0.9em;
+}
+
+.breadcrumb a {
+    color: var(--prompt);
+}
+
+ol {
+    padding-left: 1.6em;
+    margin: 0 0 0.8em 0;
+}
+
+ol li {
+    margin-bottom: 0.4em;
+}
+
+ol li::marker {
+    color: var(--dim);
+}
+
+pre {
+    background: #2a2c2e;
+    border: 1px solid var(--dim);
+    padding: 0.8em 1em;
+    margin: 1em 0;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.45;
+    color: var(--fg);
+}
+
+code {
+    font-family: inherit;
+    color: var(--accent);
+    background: #2a2c2e;
+    padding: 0.05em 0.3em;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    color: var(--fg);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 0.9em;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.4em 0.8em;
+    border-bottom: 1px dashed var(--dim);
+    vertical-align: top;
+    word-break: break-word;
+}
+
+th {
+    color: var(--accent);
+    font-weight: normal;
+    border-bottom: 1px solid var(--dim);
+}
+
+strong {
+    color: var(--fg);
+    font-weight: bold;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+
+.post-list li {
+    margin-bottom: 1.8em;
+}
+
+.post-list li::before {
+    content: "";
+}
+
+.post-list .post-date {
+    color: var(--dim);
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.post-list .post-title {
+    color: var(--prompt);
+    display: inline-block;
+    margin: 0.2em 0;
+    text-decoration: none;
+}
+
+.post-list .post-title:hover {
+    text-decoration: underline;
+}
+
+.post-list .post-desc {
+    color: var(--fg);
+    margin: 0.3em 0 0 0;
+    font-size: 0.95em;
+}
