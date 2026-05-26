@@ -15,7 +15,7 @@
 
 <section>
 <h2>Summary</h2>
-<p>This note walks through a vulnerability chain on a Python web application that allowed an unauthenticated remote attacker to reach <code>root</code> on the host. The chain combined three independently mundane conditions:</p>
+<p>This blog post walks through a vulnerability chain I discovered while hunting for bugs on a program against a Python web application that allowed an unauthenticated remote attacker to reach <code>root</code> on the host. The chain combined three independently conditions:</p>
 
 <ol>
 <li>A multipart file upload endpoint that wrote attacker-supplied bytes to disk using the raw <code>filename</code> field from the multipart envelope, without calling <code>werkzeug.utils.secure_filename()</code> or otherwise validating the resulting path.</li>
@@ -28,7 +28,7 @@
 
 <section>
 <h2>1. How the Target Surfaced</h2>
-<p>During recon I was working through a flat list of subdomains for a target and looking for two things in parallel: (a) hosts that returned <code>200</code> with a server banner indicating Python (commonly <code>gunicorn</code>, <code>werkzeug</code>, or <code>uvicorn</code>), and (b) hosts whose front pages mentioned anything resembling a job-submission or file-processing workflow. Hosts in the intersection of those two filters are disproportionately interesting: a Python web stack with user-facing file ingestion is one of the highest-yield combinations in the wild, because the framework idioms make it easy to write the unsafe version of the upload handler and equally easy to ship it.</p>
+<p>During recon I was working through a list of subdomains for a target and looking for two things in parallel: (a) hosts that returned <code>200</code> with a server banner indicating Python (commonly <code>gunicorn</code>, <code>werkzeug</code>, or <code>uvicorn</code>), and (b) hosts whose front pages mentioned anything resembling a job-submission or file-processing workflow. Hosts in the intersection of those two filters are disproportionately interesting: a Python web stack with user-facing file ingestion is one of the highest-yield combinations in the wild, because the framework idioms make it easy to write the unsafe version of the upload handler and equally easy to ship it.</p>
 
 <p>The host in question presented a simple single-page form: a text field, a file picker, and a submit button. Viewing the page source revealed a <code>multipart/form-data</code> form with a small fixed set of fields, including a free-text <code>fileName</code> and an opaque <code>taskId</code> generated client-side. No login, no captcha, no CSRF token on the POST. The endpoint accepted unauthenticated submissions.</p>
 
