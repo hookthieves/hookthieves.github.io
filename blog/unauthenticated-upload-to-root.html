@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Unauthenticated Upload to Root &ndash; CN Security Consulting</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<p class="breadcrumb"><a href="/">cn-security</a> / <a href="/blog/">blog</a> / unauthenticated-upload-to-root</p>
+
+<h1>From Unauthenticated Upload to Root: A Path-Traversal Walk-Through</h1>
+<p class="meta">TLP: CLEAR &middot; May 2026 &middot; Field Note &middot; Confidence: High</p>
+
+<section>
+<h2>Summary</h2>
+<p>This note walks through a vulnerability chain on a Python web application that allowed an unauthenticated remote attacker to reach <code>root</code> on the host. The chain combined three independently mundane conditions:</p>
+
+<ol>
+<li>A multipart file upload endpoint that wrote attacker-supplied bytes to disk using the raw <code>filename</code> field from the multipart envelope, without calling <code>werkzeug.utils.secure_filename()</code> or otherwise validating the resulting path.</li>
+<li>A web server process running under a Linux user account that owned its own home directory and a writable <code>~/.ssh/</code>.</li>
+<li>That same user being a member of the <code>sudo</code> group with a passwordless <code>sudoers</code> entry.</li>
+</ol>
+
+<p>None of these is unusual in isolation. Combined, they produced a clean unauthenticated path from a single HTTP request to interactive <code>root</code> over SSH. The walk-through below is deliberately framed around <em>how the hypothesis was formed</em> and <em>which signals confirmed each step</em>, because the technique itself is well-understood &mdash; what is usually missing in write-ups is the reasoning that bridges &ldquo;the upload field exists&rdquo; and &ldquo;the bytes I sent landed in <code>authorized_keys</code>.&rdquo;</p>
+</section>
+
+<section>
+<h2>1. How the Target Surfaced</h2>
+<p>During recon I was working through a flat list of subdomains for a target and looking for two things in parallel: (a) hosts that returned <code>200</code> with a server banner indicating Python (commonly <code>gunicorn</code>, <code>werkzeug</code>, or <code>uvicorn</code>), and (b) hosts whose front pages mentioned anything resembling a job-submission or file-processing workflow. Hosts in the intersection of those two filters are disproportionately interesting: a Python web stack with user-facing file ingestion is one of the highest-yield combinations in the wild, because the framework idioms make it easy to write the unsafe version of the upload handler and equally easy to ship it.</p>
+
+<p>The host in question presented a simple single-page form: a text field, a file picker, and a submit button. Viewing the page source revealed a <code>multipart/form-data</code> form with a small fixed set of fields, including a free-text <code>fileName</code> and an opaque <code>taskId</code> generated client-side. No login, no captcha, no CSRF token on the POST. The endpoint accepted unauthenticated submissions.</p>
+
+<p>That alone is not a finding. It is, however, the precondition for a particular hypothesis I was going to test next.</p>
+</section>
+
+<section>
+<h2>2. Forming the Hypothesis</h2>
+<p>The hypothesis was specific and falsifiable: <em>the server is calling something equivalent to <code>os.path.join(upload_dir, request.files['file'].filename)</code> and then <code>uploaded_file.save(that_path)</code>, with no sanitisation of the filename component</em>.</p>
+
+<p>This pattern is the canonical Flask / Werkzeug footgun. The framework's documentation explicitly warns about it &mdash; <code>secure_filename()</code> exists precisely to defang multipart <code>filename</code> values &mdash; but the safe version requires an extra import and an extra line. The unsafe version is what naturally falls out of a copy-paste from the Quickstart. Whenever I see a Python upload endpoint, the first thing I test for is this exact bug, because the failure mode is so common that &ldquo;does <code>secure_filename</code> appear in the request handler&rdquo; is effectively a coin-flip.</p>
+
+<p>The reason it matters that <code>os.path.join</code> is involved (as opposed to, say, manual string concatenation) is a quirk in the function's documented behaviour: if any component passed to <code>os.path.join</code> begins with a path separator, all preceding components are discarded and the result is the absolute path verbatim. In other words:</p>
+
+<pre><code>&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.path.join('/var/www/app/uploads', '12345', '/home/ubuntu/.ssh/authorized_keys')
+'/home/ubuntu/.ssh/authorized_keys'</code></pre>
+
+<p>That is the entire root cause of the class. If the attacker controls <em>any</em> component of the joined path, and that component is allowed to begin with <code>/</code>, the attacker controls the final write location.</p>
+</section>
+
+<section>
+<h2>3. Confirming the Primitive</h2>
+<p>The test for the hypothesis was a single <code>curl</code>:</p>
+
+<pre><code>curl -X POST 'https://&lt;host&gt;/api/upload' \
+  -F 'taskId=x' \
+  -F 'fileName=x' \
+  -F "file=@/tmp/probe.txt;filename=../../../../../../../tmp/cuong-probe-1.txt"</code></pre>
+
+<p>The key piece is <code>;filename=...</code> in the multipart field for the actual file part. This sets the <code>Content-Disposition</code> filename inside the part itself, which is what <code>request.files['file'].filename</code> returns in Flask &mdash; <em>not</em> the sibling <code>fileName</code> form field. The two often differ in attacker-controlled ways, and many input-validation layers only inspect the latter.</p>
+
+<p>The response was <code>HTTP 500</code> with a Python traceback containing <code>KeyError</code> on a column name that a downstream CSV-parsing step expected to find in the uploaded file. That error was the confirmation oracle: it could only be reached if the file had been written to disk and then re-read by the controller. A blocked or rejected write would have returned a different shape of error &mdash; <code>400</code>, or a <code>FileNotFoundError</code>, or a <code>PermissionError</code>. A <code>KeyError</code> from a CSV parser specifically meant <strong>the file write succeeded, the controller advanced past the write step, and the only failure was the application's attempt to parse my non-CSV content</strong>.</p>
+
+<p>I confirmed the same signal with a second request writing to a different absolute path, then SSH'd nothing &mdash; I only had the file-write primitive at this point. The next question was whether a writable filesystem location existed that would let me convert &ldquo;write any file as the web server user&rdquo; into &ldquo;execute any code as the web server user.&rdquo;</p>
+</section>
+
+<section>
+<h2>4. From File Write to Code Execution</h2>
+<p>A path-traversal-to-arbitrary-file-write primitive becomes interesting only when there is somewhere worth writing to. Common targets, in rough order of operational ease:</p>
+
+<ol>
+<li><strong>The application's own source directory.</strong> Writing into <code>app/</code>, <code>models/</code>, or any path the framework auto-loads on the next request gives in-process code execution as the web server user. This is the textbook escalation for Flask/Django/Web2py-style apps, but requires knowing the on-disk layout.</li>
+<li><strong>Cron drop directories</strong> (<code>/etc/cron.d/</code>, <code>/var/spool/cron/crontabs/&lt;user&gt;</code>). Works only if the web server user can write there, which they normally cannot.</li>
+<li><strong>The web server user's home directory.</strong> If the process runs as a real Linux account (not a system account like <code>www-data</code> or <code>nobody</code>), <code>~/.bashrc</code>, <code>~/.profile</code>, and especially <code>~/.ssh/authorized_keys</code> become available.</li>
+<li><strong>Python site-packages or <code>.pth</code> files</strong> under the user's <code>~/.local/lib/python&lt;ver&gt;/site-packages/</code>. A <code>.pth</code> file containing <code>import foo</code> runs <code>foo</code> on every Python interpreter startup that includes that site-packages on its path.</li>
+</ol>
+
+<p>The crucial reconnaissance question was: <em>which user is the web server running as?</em> The answer was inferable without RCE. Two cheap signals:</p>
+
+<ul>
+<li>The application's static-asset paths and error tracebacks (visible because Werkzeug debug mode was enabled in this environment) referenced <code>/var/www/&lt;app&gt;/</code>, which on most stock Ubuntu deployments is owned by either <code>www-data</code> or by whichever user ran the install. <code>www-data</code> typically does not have a real home directory or shell.</li>
+<li>The default user on Ubuntu cloud images is <code>ubuntu</code>, and a non-trivial fraction of self-hosted Python web apps end up being launched manually as that user with <code>nohup</code> or <code>tmux</code>, especially in academic / research / lab deployments. The shape of the deployment (single host, Werkzeug debug on, no reverse proxy in front of Flask) was strongly consistent with that pattern.</li>
+</ul>
+
+<p>The hypothesis was therefore: the process runs as <code>ubuntu</code>, has write access to <code>/home/ubuntu/</code>, and <code>/home/ubuntu/.ssh/</code> either exists or can be created. I generated an Ed25519 keypair and fired:</p>
+
+<pre><code>ssh-keygen -t ed25519 -f /tmp/pwn_key -N ""
+
+curl -X POST 'https://&lt;host&gt;/api/upload' \
+  -F 'taskId=x' \
+  -F 'fileName=x' \
+  -F "file=@/tmp/pwn_key.pub;filename=../../../../../../../home/ubuntu/.ssh/authorized_keys"</code></pre>
+
+<p>Same <code>HTTP 500 KeyError</code> response. Then:</p>
+
+<pre><code>ssh -i /tmp/pwn_key ubuntu@&lt;host&gt;</code></pre>
+
+<p>Interactive shell as <code>ubuntu</code> on the first attempt.</p>
+</section>
+
+<section>
+<h2>5. Escalation to Root</h2>
+<p>The shell landed in a user account whose <code>id</code> output included <code>27(sudo)</code>. A blind <code>sudo id</code> with no password prompt returned <code>uid=0(root)</code>.</p>
+
+<pre><code>$ id
+uid=1000(ubuntu) gid=1001(ubuntu) groups=...,27(sudo),...
+
+$ sudo id
+uid=0(root) gid=0(root) groups=0(root),1001(ubuntu)</code></pre>
+
+<p>No further work was needed. The deployment had a passwordless <code>sudoers</code> entry for the <code>ubuntu</code> user &mdash; the default on many cloud-image-based installs &mdash; and the application's choice to run as that user (rather than as a dedicated low-privilege service account) meant that &ldquo;file write as the web user&rdquo; was a direct, unauthenticated path to <code>root</code>.</p>
+
+<p>The full chain, end to end, was: unauthenticated <code>POST</code> &rarr; raw multipart filename in <code>os.path.join</code> &rarr; absolute-path write to <code>~/.ssh/authorized_keys</code> &rarr; SSH as <code>ubuntu</code> &rarr; <code>sudo -n</code> to <code>root</code>. Total wall-clock time from discovering the upload field to root shell was approximately twelve minutes, the bulk of which was spent waiting for SSH connections.</p>
+</section>
+
+<section>
+<h2>6. Root Cause &mdash; The Vulnerable Pattern</h2>
+<p>The controller code, reconstructed from the visible behaviour and a public copy of the same upstream framework integration, was structurally:</p>
+
+<pre><code>uploaded_file = request.files['file']
+file_name     = uploaded_file.filename          # raw from multipart header
+
+target_path = os.path.join(
+    project_root, 'app', 'static', 'uploads', task_id, file_name
+)
+if uploaded_file.filename != '':
+    uploaded_file.save(target_path)             # writes attacker-controlled bytes
+                                                 # to attacker-controlled path</code></pre>
+
+<p>Three things are wrong here, in roughly increasing order of severity:</p>
+
+<ul>
+<li><code>file_name</code> is never passed through <code>secure_filename()</code> or any equivalent. The multipart <code>filename</code> field is fully attacker-controlled, may contain <code>../</code>, may begin with <code>/</code>, may contain NUL bytes, and on Windows targets may include drive letters and alternate data stream syntax.</li>
+<li><code>os.path.join</code> is being asked to compose three components, the last of which is attacker-controlled. As shown earlier, if that component begins with <code>/</code>, the &ldquo;base&rdquo; is silently discarded. There is no commonly used Python idiom that catches this <em>except</em> for an explicit post-join check that the resolved path is still inside the intended directory (<code>os.path.commonpath</code> or <code>pathlib.Path.resolve().is_relative_to()</code>).</li>
+<li>The save proceeds without confirming that the final resolved path stays within <code>upload_dir</code>. Even with a sanitised filename, defence-in-depth on the resolved path would prevent the entire class of bug.</li>
+</ul>
+
+<p>The correct minimal fix is two lines:</p>
+
+<pre><code>from werkzeug.utils import secure_filename
+
+safe_name = secure_filename(uploaded_file.filename)
+if not safe_name:
+    abort(400)
+
+upload_dir = os.path.join(project_root, 'app', 'static', 'uploads', task_id)
+target_path = os.path.join(upload_dir, safe_name)
+
+# Defence in depth: ensure no traversal even if secure_filename ever regresses
+if os.path.commonpath([os.path.realpath(target_path),
+                       os.path.realpath(upload_dir)]) != os.path.realpath(upload_dir):
+    abort(400)
+
+uploaded_file.save(target_path)</code></pre>
+</section>
+
+<section>
+<h2>7. Closing Note</h2>
+<p>None of the individual bugs in this chain were particularly impactful on their own. An unauthenticated upload endpoint, an unsanitised filename, a web user with a real home directory, and a passwordless <code>sudoers</code> entry would each, in isolation, sit somewhere between Informational and Medium. It was only once they were chained together that the impact became real &mdash; and once the chain reached an interactive <code>root</code> shell over SSH from a single anonymous HTTP request, the severity escalated all the way to Critical.</p>
+</section>
+
+<footer>
+    CN Security Consulting Pty Ltd &middot; ABN 90 706 059 463
+</footer>
+
+</body>
+</html>
