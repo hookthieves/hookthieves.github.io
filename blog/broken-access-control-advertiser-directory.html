@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From a Free Account to Every Advertiser&rsquo;s Address: A Broken Access Control Walk-Through &ndash; CN Security Consulting</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<p class="breadcrumb"><a href="/">cn-security</a> / <a href="/blog/">blog</a> / broken-access-control-advertiser-directory</p>
+
+<h1>From a Free Account to Every Advertiser&rsquo;s Address: A Broken Access Control Walk-Through</h1>
+<p class="meta">TLP: CLEAR &middot; May 2026 &middot; Field Note &middot; Confidence: High</p>
+
+<section>
+<h2>Summary</h2>
+<p>A paginated listing at <code>GET /advertisers/index</code> on a self-serve advertising platform returned the <strong>entire platform-wide advertiser directory</strong> to any authenticated user. No role check, no object-level scoping &mdash; a freshly registered account sitting in &ldquo;Awaiting Approval&rdquo; status could walk 72 pages and read the names and street addresses of every advertiser in the system, 1,440+ records at the time of testing.</p>
+
+<p>The platform, host, and all identifiers are redacted; the bug was reported through a coordinated programme. The mechanics below are reconstructed faithfully with anything that would make it copy-paste reproducible against the live estate removed.</p>
+</section>
+
+<section>
+<h2>1. How It Surfaced</h2>
+<p>The platform is a legacy PHP application (CakePHP, served by Apache on Ubuntu) under a wide wildcard scope. Anonymous requests to private paths got a <code>302 &rarr; /login</code> &mdash; but the interesting question was never &ldquo;is there a login wall&rdquo;. It was whether the application&rsquo;s internal auth model was <em>are you logged in</em> or <em>are you allowed to see this</em>. On a stack where admin sections are just controllers that live one path away, the first model is extremely common.</p>
+
+<p>Registration was free and required only an email verification step. Within minutes I held a real account whose status was &ldquo;Awaiting Approval&rdquo; &mdash; the lowest privilege level the platform defines.</p>
+</section>
+
+<section>
+<h2>2. The Hypothesis</h2>
+<p>Specific and falsifiable: <em>the <code>/advertisers/index</code> action paginates the whole advertisers table with no role check, and any authenticated session is enough to read it</em>. The endpoint name has <code>index</code> in it &mdash; CakePHP&rsquo;s conventional scaffold action &mdash; and scaffolded actions are exactly the ones that ship without hand-written authorization.</p>
+</section>
+
+<section>
+<h2>3. Confirming the Primitive</h2>
+<p>One direct navigation, no admin UI, no hidden link:</p>
+
+<pre><code>GET /advertisers/index HTTP/1.1
+Host: &lt;host&gt;
+Cookie: PHPSESSID=&lt;session_cookie&gt;</code></pre>
+
+<p><code>HTTP 200</code> with a full HTML table &mdash; 20 rows per page, keys <code>?page=2</code> through <code>?page=72</code> continuing the same output. Each row exposed the advertiser ID, internal user ID, business category, full name, street address, suburb/state/postcode, and account timestamps:</p>
+
+<pre><code>ID=&lt;seq&gt; | UserID=&lt;n&gt; | Type=Accommodation | Name=&lt;advertiser&gt; |
+Address=&lt;street&gt;, &lt;suburb&gt; &lt;STATE&gt; &lt;postcode&gt; | Created=&lt;date&gt;</code></pre>
+
+<p>Two things confirmed this was the live production table and not a fixture. First, my own test account &mdash; registered minutes earlier &mdash; appeared as the last record on page 72, behind every other user in the system. Second, the unauthenticated path returned <code>302 &rarr; /login</code>: the platform itself classifies this data as private, and any logged-in user was treated as entitled to all of it.</p>
+</section>
+
+<section>
+<h2>4. Impact</h2>
+<p>The exposure is cross-user PII entered for platform use only &mdash; not displayed anywhere on the public side of the product. Two records sharpened the sensitivity beyond &ldquo;just a directory&rdquo;:</p>
+
+<ul>
+<li>A sole-trader building inspector whose <strong>personal Gmail address</strong> had been stored in the postcode field &mdash; a data-entry mismatch that only this endpoint revealed, combining a private email with a residential address that do not appear together anywhere public.</li>
+<li>An <strong>internal platform staff member&rsquo;s corporate email</strong>, sitting in the address field of a staff test account, exposed to every registered user of the platform.</li>
+</ul>
+
+<p>On scoping: this is a read-only primitive. I sampled across the pagination range to establish shape and scale rather than harvesting the full table, and confirmed no write or modification surface existed through the same path. Reported as a P3 broken-access-control finding: no admin privilege, minimal effort, but data exposure multiplied by population.</p>
+</section>
+
+<section>
+<h2>5. Root Cause</h2>
+<p>The <code>index()</code> action called <code>$this-&gt;paginate()</code> with no query scoping and no role gate &mdash; the CakePHP default returns the entire table. The controller assumed that any request reaching it was legitimate, which was true only while the session layer was the only gate. The framework&rsquo;s role-based checks were simply never applied to this action.</p>
+</section>
+
+<section>
+<h2>6. Remediation</h2>
+<ul>
+<li><strong>Gate the action by role.</strong> A staff/admin-only controller action should check that the caller holds that role &mdash; not just that the caller has a session.</li>
+<li><strong>Scope the query.</strong> Where a listing is meant to be per-user, paginate against <code>user_id = $current_user</code> rather than the whole table.</li>
+<li><strong>Treat the URL as public.</strong> &ldquo;Private&rdquo; endpoints on the public ingress are a secret only until the first directory crawl or blog post; authorization must be enforced in the controller, not by obscurity.</li>
+</ul>
+</section>
+
+<section>
+<h2>7. Closing Note</h2>
+<p>This is the cheapest class of bug a wide-scope programme will pay for: a role check missing from a scaffolded action, found in the time between registering a free account and finishing the email verification step. The value was in reading the <code>302 &rarr; /login</code> as a statement of intended sensitivity &mdash; the platform told me the data was private, and the controller disagreed.</p>
+</section>
+
+<footer>
+    CN Security Consulting Pty Ltd &middot; ABN 90 706 059 463
+</footer>
+
+</body>
+</html>

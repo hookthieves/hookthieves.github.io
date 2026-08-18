@@ -22,6 +22,11 @@
     </li>
     <li>
         <p class="post-date">2026-05</p>
+        <a class="post-title" href="broken-access-control-advertiser-directory.html">From a Free Account to Every Advertiser&rsquo;s Address: A Broken Access Control Walk-Through</a>
+        <p class="post-desc">A field note on a missing authorization check in a self-serve advertising platform: an unscoped paginated listing that returned the full platform-wide advertiser directory &mdash; names, street addresses, and internal identifiers for 1,440+ advertisers &mdash; to any registered account, including unapproved ones. On reading &ldquo;this is private&rdquo; from a 302-to-login, sampling 72 pages of cross-user PII without harvesting it, and the dirty-data clues (a personal email in a postcode field) that proved the records were genuinely private.</p>
+    </li>
+    <li>
+        <p class="post-date">2026-05</p>
         <a class="post-title" href="unauthenticated-upload-to-root.html">From Unauthenticated Upload to Root: A Path-Traversal Walk-Through</a>
         <p class="post-desc">A field note on a single-request unauthenticated path-traversal-to-root chain on a Python web application: the multipart filename footgun in <code>os.path.join</code>, an HTTP 500 used as the file-write confirmation oracle, and the runtime-environment choices (web user with a real home directory, passwordless sudo, debug mode on) that turned a contained file-write bug into a twelve-minute root shell.</p>
     </li>
