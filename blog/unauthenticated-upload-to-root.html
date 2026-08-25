@@ -11,11 +11,11 @@
 <p class="breadcrumb"><a href="/">cn-security</a> / <a href="/blog/">blog</a> / unauthenticated-upload-to-root</p>
 
 <h1>From Unauthenticated Upload to Root: A Path-Traversal Walk-Through</h1>
-<p class="meta">TLP: CLEAR &middot; May 2026 &middot; Field Note &middot; Confidence: High</p>
+<p class="meta">TLP: CLEAR &middot; May 2026 &middot; Confidence: High</p>
 
 <section>
 <h2>Summary</h2>
-<p>This note walks through a vulnerability chain on a Python web application that allowed an unauthenticated remote attacker to reach <code>root</code> on the host. The chain combined three independently mundane conditions:</p>
+<p>In this blog post, we walk through a vulnerability chain on a Python web application that allowed an unauthenticated remote attacker to reach <code>root</code> on the host. The chain combined three independently mundane conditions:</p>
 
 <ol>
 <li>A multipart file upload endpoint that wrote attacker-supplied bytes to disk using the raw <code>filename</code> field from the multipart envelope, without calling <code>werkzeug.utils.secure_filename()</code> or otherwise validating the resulting path.</li>

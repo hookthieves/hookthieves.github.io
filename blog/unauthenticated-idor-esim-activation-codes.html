@@ -11,11 +11,11 @@
 <p class="breadcrumb"><a href="/">cn-security</a> / <a href="/blog/">blog</a> / unauthenticated-idor-esim-activation-codes</p>
 
 <h1>From a Sequential ID to a Stranger&rsquo;s eSIM: An Unauthenticated IDOR Walk-Through</h1>
-<p class="meta">TLP: CLEAR &middot; 2026 &middot; Field Note &middot; Confidence: High &middot; Disclosed under coordinated terms</p>
+<p class="meta">TLP: CLEAR &middot; 2026 &middot; Confidence: High &middot; Disclosed under coordinated terms</p>
 
 <section>
 <h2>Summary</h2>
-<p>This note walks through an unauthenticated access-control failure on the inventory API of a mobile provisioning platform. Two endpoints that were never meant to be reachable without a session let an anonymous attacker walk a sequential identifier space and, for each record, retrieve the <strong>eSIM activation code</strong> belonging to a SIM that was provisioned for someone else.</p>
+<p>In this blog post, we walk through an unauthenticated access-control failure on the inventory API of a mobile provisioning platform. Two endpoints that were never meant to be reachable without a session let an anonymous attacker walk a sequential identifier space and, for each record, retrieve the <strong>eSIM activation code</strong> belonging to a SIM that was provisioned for someone else.</p>
 
 <p>The bug itself is the oldest one in the book &mdash; an object reference with no authorization check behind it. What makes it worth writing up is not the technique but two things that are usually glossed over in IDOR write-ups: <em>how you recognise that a returned blob is actually a credential</em> (the response was a PNG, not an obvious secret), and <em>how you scope the impact honestly</em> once you have the primitive &mdash; including the reasoning that kept this at High rather than letting me oversell it as Critical.</p>
 
